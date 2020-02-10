@@ -44,12 +44,31 @@ public class WordSearchController
         
         int randomRow;
         int randomCol;
+        int directionRow;
+        int directionCol;
         
         for(int index = 0; index<wordArrays.size(); index++)
         {
             randomRow = (int)(Math.random()* height);
             randomCol = (int)(Math.random()* width);
+            
+            if(board[randomRow][randomCol] == null)
+            {
+                directionRow = (int)(Math.random()*3)-1;
+                directionCol = (int)(Math.random()*3)-1;
+                
+                
+               
+            }
+            
+             
+            
         }
+    }
+    
+    private void findplace(String[] word)
+    {
+        
     }
     
     /**
