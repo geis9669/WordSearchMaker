@@ -66,6 +66,41 @@ public class WordSearchController
         }
     }
     
+    /**
+     * this method tests if a word will fit in the board 
+     * it start on the square after the startRow and startCol
+     * @param board
+     * @param startRow
+     * @param startCol
+     * @param directionRow
+     * @param directionCol
+     * @param word
+     * @return
+     */
+    private boolean testRowDirection(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
+    {
+        int times = 1;
+        int nextRow = startRow;
+        int nextCol = startCol;
+        
+        for(int index =1; index<word.length; index++)
+        {
+            nextRow = startRow + directionRow;
+            nextCol = startCol + directionCol;
+            
+            if(!(board.length>nextRow && board[nextRow].length>nextCol))//this checks if the next space is a valid place in the board
+            {
+                return false;// is no longer in the board
+            }
+            
+            if(!(board[nextRow][nextCol] == null || board[nextRow][nextCol].equals(word[index])))// checking if the place is either null or the letter I want
+            {
+                return false; // the board already has a letter there.
+            }
+            times += 1;
+        }
+        return true;// the word will fit in the board
+    }
     
     /**
      * this will add the letters from the word to the board.
