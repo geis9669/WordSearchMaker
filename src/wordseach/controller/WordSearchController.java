@@ -31,7 +31,8 @@ public class WordSearchController
     
     public void start()
     {
-        makeWordArrays(wordsToHide);
+//        makeWordArrays(wordsToHide);
+        makeBoard(height, width, wordsToHide);
     }
     
     
@@ -47,7 +48,7 @@ public class WordSearchController
         int directionRow;
         int directionCol;
         
-        for(int index = 0; index<wordArrays.size(); index++)
+        for(int index = 0; index<wordArrays.size(); index++)// for each word
         {
             randomRow = (int)(Math.random()* height);
             randomCol = (int)(Math.random()* width);
@@ -56,7 +57,11 @@ public class WordSearchController
             {
                 directionRow = (int)(Math.random()*3)-1;
                 directionCol = (int)(Math.random()*3)-1;
-                
+                if(testRowDirection(board,randomRow,randomCol,directionRow,directionCol,wordArrays.get(index)))
+                {
+                    addWord(board,randomRow,randomCol,directionRow,directionCol,wordArrays.get(index));
+                    displayBoard(board);
+                }
                 
                
             }
@@ -79,16 +84,12 @@ public class WordSearchController
      */
     private boolean testRowDirection(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
     {
-        int times = 1;
         int nextRow = startRow;
         int nextCol = startCol;
         
-        for(int index =1; index<word.length; index++)
+        for(int index =0; index<word.length; index++)
         {
-            nextRow = startRow + directionRow;
-            nextCol = startCol + directionCol;
-            
-            if(!(board.length>nextRow && board[nextRow].length>nextCol))//this checks if the next space is a valid place in the board
+            if(!((board.length>nextRow && -1<nextRow) && (board[nextRow].length>nextCol &&-1<nextCol)))//this checks if the next space is a valid place in the board
             {
                 return false;// is no longer in the board
             }
@@ -97,7 +98,8 @@ public class WordSearchController
             {
                 return false; // the board already has a letter there.
             }
-            times += 1;
+            nextRow = startRow + directionRow;
+            nextCol = startCol + directionCol;
         }
         return true;// the word will fit in the board
     }
@@ -117,9 +119,10 @@ public class WordSearchController
         int row = startRow;
         int col = startCol;
         
-        for(int index = 0; index< word.length; index++)
+        for(int index = 0; index<word.length; index++)
         {
-            board[row][col] = word[index];
+            String letter = word[index];
+            board[row][col] = letter ;//word[index];
             row += directionRow;
             col += directionCol;
         }
