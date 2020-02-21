@@ -66,6 +66,30 @@ public class WordSearchController
         }
     }
     
+    
+    /**
+     * this will add the letters from the word to the board.
+     * @param board
+     * @param startRow
+     * @param startCol
+     * @param directionRow
+     * @param directionCol
+     * @param word
+     */
+    private void addWord(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
+    {
+        
+        int row = startRow;
+        int col = startCol;
+        
+        for(int index = 0; index< word.length; index++)
+        {
+            board[row][col] = word[index];
+            row += directionRow;
+            col += directionCol;
+        }
+    }
+    
     private void findplace(String[] word)
     {
         
