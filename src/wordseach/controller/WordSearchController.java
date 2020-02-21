@@ -152,5 +152,25 @@ public class WordSearchController
         }    
         return results;
     }
+    
+    
+    private void displayBoard(String[][] board)
+    {
+        String toPrint = "";
+        for(int row= 0; row< board.length; row++)
+        { 
+            for(int col = 0; col< board[0].length; col++)
+            {
+                if(board[row][col] == null)
+                {
+                    board[row][col] = "1";
+                }
+                toPrint += board[row][col]+ " ";
+                
+            }
+            toPrint += "\n";
+        }
+        System.out.print(toPrint);
+    }
 
 }
