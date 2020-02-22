@@ -98,8 +98,8 @@ public class WordSearchController
             {
                 return false; // the board already has a letter there.
             }
-            nextRow = startRow + directionRow;
-            nextCol = startCol + directionCol;
+            nextRow += directionRow;
+            nextCol += directionCol;
         }
         return true;// the word will fit in the board
     }
