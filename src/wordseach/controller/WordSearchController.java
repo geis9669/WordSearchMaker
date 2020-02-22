@@ -73,10 +73,10 @@ public class WordSearchController
     
     /**
      * this method tests if a word will fit in the board 
-     * it start on the square after the startRow and startCol
+     * it start on the square specified by the startRow and startCol
      * @param board
-     * @param startRow
-     * @param startCol
+     * @param startRow the row to start at
+     * @param startCol the column to start at
      * @param directionRow
      * @param directionCol
      * @param word
