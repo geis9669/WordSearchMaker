@@ -155,8 +155,11 @@ public class WordSearchController
         }    
         return results;
     }
-    
-    
+
+    /**
+     * this method makes a string of all the letters of the board and prints them to the console
+     * @param board the 2D array that you want printed it should have only one character for each space.
+     */
     private void displayBoard(String[][] board)
     {
         String toPrint = "";
