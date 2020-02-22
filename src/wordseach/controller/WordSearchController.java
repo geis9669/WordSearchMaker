@@ -122,6 +122,7 @@ public class WordSearchController
         for(int index = 0; index<word.length; index++)
         {
             String letter = word[index];
+            //System.out.println(row + "  " + col+"  "+ index); a print to debug.
             board[row][col] = letter ;//word[index];
             row += directionRow;
             col += directionCol;
