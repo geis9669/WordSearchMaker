@@ -2,11 +2,12 @@ package wordseach.controller;
 
 import java.util.List;
 import java.util.ArrayList;
+import wordseach.model.WordSearchBoard;
 
 public class WordSearchController
 {
-    private String[][] board;
-    
+    private WordSearchBoard board;
+
     private List<String> wordsToHide;
     
     private int width;
@@ -31,139 +32,12 @@ public class WordSearchController
     
     public void start()
     {
-//        makeWordArrays(wordsToHide);
-        makeBoard(height, width, wordsToHide);
+        board.makeBoard(height, width, wordsToHide);
     }
     
     
     
-    private void makeBoard(int height, int width, List<String> words)
-    {
-        board = new String[height][width];
-        
-        List<String[]> wordArrays = makeWordArrays(words);
-        
-        int randomRow;
-        int randomCol;
-        int directionRow;
-        int directionCol;
 
-        boolean wordPlaced;
-
-
-        
-        for(int index = 0; index<wordArrays.size(); index++)// for each word
-        {
-            wordPlaced = false;
-            randomRow = (int)(Math.random()* height);
-            randomCol = (int)(Math.random()* width);
-            
-
-
-            while(!wordPlaced ) {
-                directionRow = (int) (Math.random() * 3) - 1;// needs a test to make sure both directions are not 0,0
-                directionCol = (int) (Math.random() * 3) - 1;
-
-                System.out.println(randomRow + "  " + randomCol + "  " + directionRow + "  " + directionCol);
-                if(testRowDirection(board, randomRow, randomCol, directionRow, directionCol, wordArrays.get(index))) {
-                    addWord(board, randomRow, randomCol, directionRow, directionCol, wordArrays.get(index));
-                    displayBoard(board);
-                    wordPlaced = true;
-                }
-            }
-               
-
-            
-             
-            
-        }
-    }
-    
-    /**
-     * this method tests if a word will fit in the board 
-     * it start on the square specified by the startRow and startCol
-     * @param board
-     * @param startRow the row to start at
-     * @param startCol the column to start at
-     * @param directionRow
-     * @param directionCol
-     * @param word
-     * @return
-     */
-    private boolean testRowDirection(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
-    {
-        int nextRow = startRow;
-        int nextCol = startCol;
-        
-        for(int index =0; index<word.length; index++)
-        {
-            if(!((board.length>nextRow && -1<nextRow) && (board[nextRow].length>nextCol &&-1<nextCol)))//this checks if the next space is a valid place in the board
-            {
-                return false;// is no longer in the board
-            }
-            
-            if(!(board[nextRow][nextCol] == null || board[nextRow][nextCol].equals(word[index])))// checking if the place is either null or the letter I want
-            {
-                return false; // the board already has a letter there.
-            }
-            nextRow += directionRow;
-            nextCol += directionCol;
-        }
-        return true;// the word will fit in the board
-    }
-    
-    /**
-     * this will add the letters from the word to the board.
-     * @param board
-     * @param startRow
-     * @param startCol
-     * @param directionRow
-     * @param directionCol
-     * @param word
-     */
-    private void addWord(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
-    {
-        
-        int row = startRow;
-        int col = startCol;
-        
-        for(int index = 0; index<word.length; index++)
-        {
-            String letter = word[index];
-            //System.out.println(row + "  " + col+"  "+ index); a print to debug.
-            board[row][col] = letter ;//word[index];
-            row += directionRow;
-            col += directionCol;
-        }
-    }
-    
-    private void findplace(String[] word)
-    {
-        
-    }
-    
-    /**
-     * makes the strings in the list to be arrays where each index has only one letter from the word
-     * @param words the words to separate into letters
-     * @return the arrays of the words.
-     */
-    private List<String[]> makeWordArrays(List<String> words)
-    {
-        List<String[]> results = new ArrayList<>();
-        
-        for(int index = 0; index<words.size(); index++)
-        {
-            String word = words.get(index);
-            String[] wordArray = new String[word.length()];
-            
-            for(int wordIndex = 0; wordIndex<word.length(); wordIndex++)
-            {
-                wordArray[wordIndex] = word.substring(wordIndex, wordIndex+1);
-            }
-            results.add(wordArray);
-        }    
-        return results;
-    }
 
     /**
      * this method makes a string of all the letters of the board and prints them to the console
