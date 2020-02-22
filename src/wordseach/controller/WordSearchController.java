@@ -21,7 +21,11 @@ public class WordSearchController
         
         addWords(wordsToHide);
     }
-    
+
+    /**
+     * method used for testing.
+     * @param list the list for the words that will be hidden
+     */
     private void addWords(List<String> list)
     {
         list.add("gregory");
