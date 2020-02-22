@@ -47,24 +47,32 @@ public class WordSearchController
         int randomCol;
         int directionRow;
         int directionCol;
+
+        boolean wordPlaced;
+
+
         
         for(int index = 0; index<wordArrays.size(); index++)// for each word
         {
+            wordPlaced = false;
             randomRow = (int)(Math.random()* height);
             randomCol = (int)(Math.random()* width);
             
-            if(board[randomRow][randomCol] == null)
-            {
-                directionRow = (int)(Math.random()*3)-1;
-                directionCol = (int)(Math.random()*3)-1;
-                if(testRowDirection(board,randomRow,randomCol,directionRow,directionCol,wordArrays.get(index)))
-                {
-                    addWord(board,randomRow,randomCol,directionRow,directionCol,wordArrays.get(index));
+
+
+            while(!wordPlaced ) {
+                directionRow = (int) (Math.random() * 3) - 1;// needs a test to make sure both directions are not 0,0
+                directionCol = (int) (Math.random() * 3) - 1;
+
+                System.out.println(randomRow + "  " + randomCol + "  " + directionRow + "  " + directionCol);
+                if(testRowDirection(board, randomRow, randomCol, directionRow, directionCol, wordArrays.get(index))) {
+                    addWord(board, randomRow, randomCol, directionRow, directionCol, wordArrays.get(index));
                     displayBoard(board);
+                    wordPlaced = true;
                 }
-                
-               
             }
+               
+
             
              
             
