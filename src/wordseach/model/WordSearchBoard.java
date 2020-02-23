@@ -38,7 +38,13 @@ public class WordSearchBoard
 
     }
 
-    public void makeBoard(int height, int width, List<String> words)
+    public String[][] getBoard()
+    {
+        return this.board;
+    }
+
+    // may return the board after it finishes or report problems
+    public void makeBoard()
     {
         board = new String[height][width];
 
