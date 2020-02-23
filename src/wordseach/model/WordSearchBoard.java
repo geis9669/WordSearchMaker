@@ -86,13 +86,13 @@ public class WordSearchBoard
     /**
      * this method tests if a word will fit in the board
      * it start on the square specified by the startRow and startCol
-     * @param board
+     * @param board the word search board to add the word to
      * @param startRow the row to start at
      * @param startCol the column to start at
      * @param directionRow to go up with -1 down 1 and nothing 0
      * @param directionCol move left with -1 right with 1 and nothing 0
      * @param word the word as a array to add to the board
-     * @return
+     * @return true if the word fits there and false if it doesn't
      */
     private boolean testRowDirection(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
     {
