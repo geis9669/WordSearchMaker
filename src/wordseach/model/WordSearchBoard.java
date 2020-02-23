@@ -16,10 +16,25 @@ public class WordSearchBoard
     private int width;
 
     public WordSearchBoard(int height, int width, List<String> words)
+
+    /**
+     *
+     * @param height
+     * @param width
+     * @param wordsToHide the list of words to hide make sure its sorted from largest to smallest.
+     * @param randomLetters a string of all the possible characters that will fill empty space and if it has duplicate
+     *                      then more likely they will be used.
+     */
+    public WordSearchBoard(int height, int width, List<String> wordsToHide, String randomLetters)
     {
         this.height = height;
         this.width = width;
-        wordsToHide = words;
+        this.wordsToHide = wordsToHide;
+
+        this.randomLetters = randomLetters;
+
+    }
+
 
     }
 
