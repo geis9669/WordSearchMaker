@@ -16,6 +16,7 @@ public class WordSearchBoard
     private int width;
 
     public WordSearchBoard(int height, int width, List<String> words)
+    private String randomLetters;
 
     /**
      *
