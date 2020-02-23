@@ -12,8 +12,8 @@ public class WordSearchBoard
 {
     private String[][] board;
     private List<String> wordsToHide;
-    int height;
-    int width;
+    private int height;
+    private int width;
 
     public WordSearchBoard(int height, int width, List<String> words)
     {
