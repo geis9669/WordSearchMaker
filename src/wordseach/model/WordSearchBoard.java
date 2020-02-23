@@ -48,7 +48,7 @@ public class WordSearchBoard
     {
         board = new String[height][width];
 
-        List<String[]> wordArrays = makeWordArrays(words);
+        List<String[]> wordArrays = makeWordArrays(wordsToHide);
 
         int randomRow;
         int randomCol;
