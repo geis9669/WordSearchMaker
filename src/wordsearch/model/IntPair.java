@@ -1,6 +1,6 @@
-package wordseach.model;
+package wordsearch.model;
 
-public class IntPair
+public final class IntPair
 {
     private int rowDirection;
     private int colDirection;
@@ -19,6 +19,14 @@ public class IntPair
     public int getColDirection()
     {
         return this.colDirection;
+    }
+
+    public int hashCode()
+    {
+        int hash = 7;
+        hash += 31 * hash + (int) rowDirection;
+        hash += 31 * hash + (int) colDirection;
+        return hash;
     }
 
     public boolean equals(Object object)
