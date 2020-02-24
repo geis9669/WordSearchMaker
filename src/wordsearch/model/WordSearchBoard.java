@@ -1,4 +1,4 @@
-package wordseach.model;
+package wordsearch.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +34,9 @@ public class WordSearchBoard
         this.randomLetters = randomLetters;
 
     }
+
+    private void fixSize(int height, int width, List<String> words)
+    {
 
 
     }
@@ -139,11 +142,6 @@ public class WordSearchBoard
             row += directionRow;
             col += directionCol;
         }
-    }
-
-    private void findplace(String[] word)
-    {
-
     }
 
     /**

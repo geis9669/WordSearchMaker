@@ -1,8 +1,8 @@
-package wordseach.controller;
+package wordsearch.controller;
 
 import java.util.List;
 import java.util.ArrayList;
-import wordseach.model.WordSearchBoard;
+import wordsearch.model.WordSearchBoard;
 
 public class WordSearchController
 {
@@ -70,3 +70,6 @@ public class WordSearchController
     }
 
 }
+// February 21 2020
+// to day I made the method that finds a valid spot work and it prints the board
+// I started on making the algorithm to test all the directions that the word could face

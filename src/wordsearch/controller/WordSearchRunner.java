@@ -1,4 +1,4 @@
-package wordseach.controller;
+package wordsearch.controller;
 
 public class WordSearchRunner
 {
