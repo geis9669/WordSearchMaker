@@ -2,30 +2,30 @@ package wordsearch.model;
 
 public final class IntPair
 {
-    private int rowDirection;
-    private int colDirection;
+    private int firstInt;
+    private int secondInt;
 
-    public IntPair(int directionRow, int directionCol)
+    public IntPair(int firstInt, int secondInt)
     {
-        this.rowDirection = directionRow;
-        this.colDirection = directionCol;
+        this.firstInt = firstInt;
+        this.secondInt = secondInt;
     }
 
-    public int getRowDirection()
+    public int getFirst()
     {
-        return this.rowDirection;
+        return this.firstInt;
     }
 
-    public int getColDirection()
+    public int getSecond()
     {
-        return this.colDirection;
+        return this.secondInt;
     }
 
     public int hashCode()
     {
         int hash = 7;
-        hash += 31 * hash + (int) rowDirection;
-        hash += 31 * hash + (int) colDirection;
+        hash += 31 * hash + (int) firstInt;
+        hash += 31 * hash + (int) secondInt;
         return hash;
     }
 
@@ -46,8 +46,8 @@ public final class IntPair
         if(object instanceof IntPair)
         {
             IntPair other = (IntPair) object;
-            if(rowDirection == other.getRowDirection()
-                    && colDirection == other.getColDirection())
+            if(firstInt == other.getFirst()
+                    && secondInt == other.getSecond())
             {
                 return true;
             }
