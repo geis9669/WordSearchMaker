@@ -1,7 +1,10 @@
 package wordsearch.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+//import java.util.concurrent.CopyOnWriteArrayList;
 
 
 // this will take the size the user wants and then if any words won't fit in the board because they are too big it will
@@ -10,7 +13,7 @@ import java.util.List;
 
 public class WordSearchBoard
 {
-    private final IntPair[] directions;
+    private final IntPair[] DIRECTIONS;
 
     private String[][] board;
     private List<String> wordsToHide;
@@ -35,8 +38,8 @@ public class WordSearchBoard
 
         this.randomLetters = randomLetters;
 
-        directions = new IntPair[8];
-        // fill the directions array with the directions
+        DIRECTIONS = new IntPair[8];
+        // fill the DIRECTIONS array with the DIRECTIONS
         int index = 0;
         for(int row = -1; row<2; row++)
         {
@@ -44,11 +47,12 @@ public class WordSearchBoard
             {
                 if(!(row == 0 && col == 0))
                 {
-                    directions[index] = new IntPair(row,col);
+                    DIRECTIONS[index] = new IntPair(row,col);
+                    index++;
                 }
             }
         }
-        // done with fill the directions array
+        // done with fill the DIRECTIONS array
     }
 
     private void fixSize(int height, int width, List<String> words)
@@ -84,14 +88,15 @@ public class WordSearchBoard
             randomCol = (int)(Math.random()* width);
 
 
-            while(!wordPlaced ) {
-                directionRow = (int) (Math.random() * 3) - 1;// needs a test to make sure both directions are not 0,0
-                directionCol = (int) (Math.random() * 3) - 1;
+            // test for the first direction that works
+            List<IntPair> possibleDirections = new ArrayList<>(8);
+            Collections.addAll(possibleDirections, DIRECTIONS);
+            while(!wordPlaced && possibleDirections.size() > 0) {
+                IntPair direction = possibleDirections.remove(((int) (Math.random()* possibleDirections.size())));
 
-                System.out.println(randomRow + "  " + randomCol + "  " + directionRow + "  " + directionCol);
-                if(testRowDirection(board, randomRow, randomCol, directionRow, directionCol, wordArrays.get(index))) {
-                    addWord(board, randomRow, randomCol, directionRow, directionCol, wordArrays.get(index));
-                    //displayBoard(board);
+                System.out.println(randomRow + "  " + randomCol + "  " + direction.getFirst() + "  " + direction.getSecond());
+                if(testRowDirection(board, randomRow, randomCol, direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
+                    addWord(board, randomRow, randomCol, direction.getFirst(), direction.getSecond(), wordArrays.get(index));
                     wordPlaced = true;
                 }
             }
