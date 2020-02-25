@@ -21,8 +21,8 @@ public class WordSearchBoard
 
     /**
      *
-     * @param height
-     * @param width
+     * @param height the desired height of the board if its too small it will be increased
+     * @param width the desired width of the board if its too small it will be increased
      * @param wordsToHide the list of words to hide make sure its sorted from largest to smallest.
      * @param randomLetters a string of all the possible characters that will fill empty space and if it has duplicate
      *                      then more likely they will be used.
