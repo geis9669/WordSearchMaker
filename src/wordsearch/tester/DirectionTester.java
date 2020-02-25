@@ -14,7 +14,7 @@ public class DirectionTester {
         for(int time = 0; time < 9; time++)
         {
             IntPair pair= direction.getRandomDirection();
-            text += "" + pair.getRowDirection()+"  "+ pair.getColDirection()+ "\n";
+            text += "" + pair.getFirst()+"  "+ pair.getSecond()+ "\n";
         }
         System.out.println(text);
 
@@ -26,7 +26,7 @@ public class DirectionTester {
             IntPair pair= direction.getRandomDirection();
             if(pair != null)
             {
-                text += "" + pair.getRowDirection()+"  "+ pair.getColDirection()+ "\n";
+                text += "" + pair.getFirst()+"  "+ pair.getSecond()+ "\n";
             }
             else
             {
