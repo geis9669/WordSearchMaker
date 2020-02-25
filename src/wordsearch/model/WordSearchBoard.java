@@ -10,6 +10,8 @@ import java.util.List;
 
 public class WordSearchBoard
 {
+    private final IntPair[] directions;
+
     private String[][] board;
     private List<String> wordsToHide;
     private int height;
@@ -33,6 +35,20 @@ public class WordSearchBoard
 
         this.randomLetters = randomLetters;
 
+        directions = new IntPair[8];
+        // fill the directions array with the directions
+        int index = 0;
+        for(int row = -1; row<2; row++)
+        {
+            for(int col = -1; col<2; col++)
+            {
+                if(!(row == 0 && col == 0))
+                {
+                    directions[index] = new IntPair(row,col);
+                }
+            }
+        }
+        // done with fill the directions array
     }
 
     private void fixSize(int height, int width, List<String> words)
