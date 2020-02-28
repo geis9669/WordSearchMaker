@@ -75,8 +75,6 @@ public class WordSearchBoard
 
         int randomRow;
         int randomCol;
-        int directionRow;
-        int directionCol;
 
         boolean wordPlaced;
 
