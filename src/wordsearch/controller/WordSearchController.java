@@ -16,9 +16,9 @@ public class WordSearchController
     public WordSearchController()
     {
         wordsToHide = new ArrayList<>();
-        width = 10;
-        height = 10;
-        
+        width = 9;
+        height = 8;
+
         addWords(wordsToHide);
     }
 
@@ -32,6 +32,9 @@ public class WordSearchController
         list.add("java");
         list.add("arraylist");
         list.add("board");
+        list.add("start");
+        list.add("today");
+        list.add("friday");
     }
     
     public void start()
