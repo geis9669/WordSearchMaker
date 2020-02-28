@@ -1,9 +1,9 @@
 package wordsearch.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.Collections;
 //import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class WordSearchBoard
 {
-    private final IntPair[] DIRECTIONS;
+    private final List<IntPair> DIRECTIONS;
 
     private String[][] board;
     private List<String> wordsToHide;
@@ -38,8 +38,8 @@ public class WordSearchBoard
 
         this.randomLetters = randomLetters;
 
-        DIRECTIONS = new IntPair[8];
-        // fill the DIRECTIONS array with the DIRECTIONS
+        List<IntPair> directions = new ArrayList<>(8);
+        // fill the DIRECTIONS array with the DIRECTIONS I want to go
         int index = 0;
         for(int row = -1; row<2; row++)
         {
@@ -47,12 +47,14 @@ public class WordSearchBoard
             {
                 if(!(row == 0 && col == 0))
                 {
-                    DIRECTIONS[index] = new IntPair(row,col);
+                    directions.add(new IntPair(row,col));
                     index++;
                 }
             }
         }
-        // done with filling the DIRECTIONS array
+        DIRECTIONS = List.copyOf(directions);
+        // done with filling the DIRECTIONS immutable list
+
     }
 
     private void fixSize(int height, int width, List<String> words)
@@ -96,7 +98,7 @@ public class WordSearchBoard
                 IntPair place = possibleSpots.remove(randomPlace);
 
                 List<IntPair> possibleDirections = new ArrayList<>(8);
-                Collections.addAll(possibleDirections, DIRECTIONS);
+                possibleDirections.addAll(DIRECTIONS);
                 // this loop goes through all the directions that the word can go.
                 while(!wordPlaced && possibleDirections.size() > 0) {
                     IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
