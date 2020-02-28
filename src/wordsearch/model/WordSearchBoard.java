@@ -95,14 +95,13 @@ public class WordSearchBoard
                 int randomPlace = (int) (Math.random()*possibleSpots.size());
                 IntPair place = possibleSpots.remove(randomPlace);
 
-
                 List<IntPair> possibleDirections = new ArrayList<>(8);
                 Collections.addAll(possibleDirections, DIRECTIONS);
                 // this loop goes through all the directions that the word can go.
                 while(!wordPlaced && possibleDirections.size() > 0) {
                     IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
 
-                    System.out.println(place.getFirst() + "  " + place.getSecond() + "  " + direction.getFirst() + "  " + direction.getSecond());
+                    //System.out.println(place.getFirst() + "  " + place.getSecond() + "  " + direction.getFirst() + "  " + direction.getSecond());
                     if(testRowDirection(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
                         addWord(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index));
                         wordPlaced = true;
@@ -134,12 +133,13 @@ public class WordSearchBoard
 
         for(int index =0; index<word.length; index++)
         {
-            if(!((board.length>nextRow && -1<nextRow) && (board[nextRow].length>nextCol &&-1<nextCol)))//this checks if the next space is a valid place in the board
+            //this checks if the next space is a valid place in the board
+            if(!((board.length>nextRow && -1<nextRow) && (board[nextRow].length>nextCol &&-1<nextCol)))
             {
                 return false;// is no longer in the board
             }
-
-            if(!(board[nextRow][nextCol] == null || board[nextRow][nextCol].equals(word[index])))// checking if the place is either null or the letter I want
+            // checking if the place is either null or the letter I want
+            if(!(board[nextRow][nextCol] == null || board[nextRow][nextCol].equals(word[index])))
             {
                 return false; // the board already has a letter there.
             }
