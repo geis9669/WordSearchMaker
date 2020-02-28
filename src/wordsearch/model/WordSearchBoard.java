@@ -52,7 +52,7 @@ public class WordSearchBoard
                 }
             }
         }
-        // done with fill the DIRECTIONS array
+        // done with filling the DIRECTIONS array
     }
 
     private void fixSize(int height, int width, List<String> words)
@@ -70,32 +70,43 @@ public class WordSearchBoard
     public void makeBoard()
     {
         board = new String[height][width];
+        // makes a list of all the possible spots.
+        List<IntPair> allPossibleSpots = new ArrayList<>();
+        for(int row = 0; row<board.length; row++)
+        {
+            for(int col = 0; col<board[0].length; col++)
+            {
+                allPossibleSpots.add(new IntPair(row,col));
+            }
+        }
 
         List<String[]> wordArrays = makeWordArrays(wordsToHide);
+        boolean wordPlaced;// tells me that the word has been put into the array or not.
 
-        int randomRow;
-        int randomCol;
-
-        boolean wordPlaced;
-
-
-        for(int index = 0; index<wordArrays.size(); index++)// for each word
+        // this loop goes through each word to find it a home.
+        for(int index = 0; index<wordArrays.size(); index++)
         {
             wordPlaced = false;
-            randomRow = (int)(Math.random()* height);
-            randomCol = (int)(Math.random()* width);
+
+            List<IntPair> possibleSpots = new ArrayList<>();
+            possibleSpots.addAll(allPossibleSpots);
+            // this loop goes through all the spots until it finds one that works
+            while(!wordPlaced && possibleSpots.size()>0) {
+                int randomPlace = (int) (Math.random()*possibleSpots.size());
+                IntPair place = possibleSpots.remove(randomPlace);
 
 
-            // test for the first direction that works
-            List<IntPair> possibleDirections = new ArrayList<>(8);
-            Collections.addAll(possibleDirections, DIRECTIONS);
-            while(!wordPlaced && possibleDirections.size() > 0) {
-                IntPair direction = possibleDirections.remove(((int) (Math.random()* possibleDirections.size())));
+                List<IntPair> possibleDirections = new ArrayList<>(8);
+                Collections.addAll(possibleDirections, DIRECTIONS);
+                // this loop goes through all the directions that the word can go.
+                while(!wordPlaced && possibleDirections.size() > 0) {
+                    IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
 
-                System.out.println(randomRow + "  " + randomCol + "  " + direction.getFirst() + "  " + direction.getSecond());
-                if(testRowDirection(board, randomRow, randomCol, direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
-                    addWord(board, randomRow, randomCol, direction.getFirst(), direction.getSecond(), wordArrays.get(index));
-                    wordPlaced = true;
+                    System.out.println(place.getFirst() + "  " + place.getSecond() + "  " + direction.getFirst() + "  " + direction.getSecond());
+                    if(testRowDirection(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
+                        addWord(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index));
+                        wordPlaced = true;
+                    }
                 }
             }
 
