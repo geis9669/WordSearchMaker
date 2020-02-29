@@ -72,7 +72,7 @@ public class WordSearchBoard
     public void makeBoard()
     {
         board = new String[height][width];
-        List<String[]> wordsThatDidentFit = new ArrayList<>();
+        List<String> wordsThatDidentFit = new ArrayList<>();
         // makes a list of all the possible spots.
         List<IntPair> allPossibleSpots = new ArrayList<>();
         for(int row = 0; row<board.length; row++)
@@ -114,7 +114,13 @@ public class WordSearchBoard
 
             if(!wordPlaced)
             {
-                wordsThatDidentFit.add(wordArrays.get(index));
+                String word = "";
+                for(String letter: wordArrays.get(index))
+                {
+                    word += letter;
+                }
+                wordsThatDidentFit.add(word);
+                //System.out.println(wordsThatDidentFit);
             }
 
         }
