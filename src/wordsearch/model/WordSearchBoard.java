@@ -124,6 +124,21 @@ public class WordSearchBoard
             }
 
         }
+        
+        // sets the nulls to random characters 
+        for(int row= 0; row< board.length; row++)
+        { 
+            for(int col = 0; col< board[0].length; col++)
+            {
+                if(board[row][col] == null)
+                {
+                    int random = (int) (Math.random()*randomLetters.length());
+                    String character = randomLetters.substring(random, random+1);
+                    board[row][col] = character;
+                }                
+            }
+            
+        }
 
         // maybe return what words don't fit in the board
     }
