@@ -71,6 +71,10 @@ public class WordSearchBoard
 
     }
 
+    /**
+     * this will return the finished board or null if it isn't made
+     * @return the board or null
+     */
     public String[][] getBoard()
     {
         return this.board;
@@ -84,6 +88,57 @@ public class WordSearchBoard
     {
         return this.wordsThatDidentFit;
     }
+    
+    /**
+     * this will let you get the letters that will be all the blank spaces
+     * @return
+     */
+    public String getRandomLetters()
+    {
+        return randomLetters;
+    }
+
+
+    /**
+     * lets you set the letters 
+     * @param randomLetters
+     */
+    public void setRandomLetters(String randomLetters)
+    {
+        this.randomLetters = randomLetters;
+    }
+    
+    public List<String> getWordsToHide()
+    {
+        return wordsToHide;
+    }
+
+
+    public void setWordsToHide(List<String> wordsToHide)
+    {
+        this.wordsToHide = wordsToHide;
+    }
+
+
+    public int getHeight()
+    {
+        return height;
+    }
+    
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public void setSize(int height, int width)
+    {
+        this.height = height;
+        this.width = width;
+    }
+
+
+    
+
 
     // may return the board after it finishes or report problems
     public void makeBoard()
