@@ -16,6 +16,9 @@ public class WordSearchBoard
     private final List<IntPair> DIRECTIONS;
 
     private String[][] board;
+    
+    private List<String> wordsThatDidentFit;
+  
     private List<String> wordsToHide;
     private int height;
     private int width;
@@ -67,12 +70,22 @@ public class WordSearchBoard
     {
         return this.board;
     }
+    
+    /**
+     * this will return the words that diden't fit for the most recent make of the board
+     * @return a list either empty or with words but not null
+     */
+    public List<String> getWordsThatdidentFit()
+    {
+        return this.wordsThatDidentFit;
+    }
 
     // may return the board after it finishes or report problems
     public void makeBoard()
     {
         board = new String[height][width];
-        List<String> wordsThatDidentFit = new ArrayList<>();
+        //List<String> wordsThatDidentFit = new ArrayList<>();
+        wordsThatDidentFit.clear();
         // makes a list of all the possible spots.
         List<IntPair> allPossibleSpots = new ArrayList<>();
         for(int row = 0; row<board.length; row++)
