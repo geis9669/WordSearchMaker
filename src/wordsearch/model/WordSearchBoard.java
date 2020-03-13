@@ -39,6 +39,12 @@ public class WordSearchBoard
         this.wordsToHide = wordsToHide;
 
         this.randomLetters = randomLetters;
+        if(this.randomLetters == null)
+        {
+            this.randomLetters = " ";
+        }
+        
+        this.wordsThatDidentFit = new ArrayList<>();
 
         List<IntPair> directions = new ArrayList<>(8);
         // fill the DIRECTIONS array with the DIRECTIONS I want to go
