@@ -16,8 +16,8 @@ public class WordSearchController
     public WordSearchController()
     {
         wordsToHide = new ArrayList<>();
-        width = 9;
-        height = 8;
+        width  = 12;
+        height = 12;
 
         addWords(wordsToHide);
     }
