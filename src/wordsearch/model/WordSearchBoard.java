@@ -65,6 +65,7 @@ public class WordSearchBoard
 
     }
 
+    
     private void fixSize(int height, int width, List<String> words)
     {
 
@@ -141,8 +142,17 @@ public class WordSearchBoard
 
 
     // may return the board after it finishes or report problems
+    /**
+     * 
+     */
     public void makeBoard()
     {
+        if(height <= 0 || width <= 0)
+        {
+            height = 0;
+            width = 0;
+        }
+        
         board = new String[height][width];
         //List<String> wordsThatDidentFit = new ArrayList<>();
         wordsThatDidentFit.clear();
