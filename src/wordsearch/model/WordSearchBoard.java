@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class WordSearchBoard
 {
-    private final List<IntPair> DIRECTIONS;
-
     private String[][] board;
     
     private List<String> wordsThatDidentFit;
@@ -22,8 +20,9 @@ public class WordSearchBoard
     private List<String> wordsToHide;
     private int height;
     private int width;
-
     private String randomLetters;
+    
+    private final List<IntPair> DIRECTIONS;
 
     /**
      *
