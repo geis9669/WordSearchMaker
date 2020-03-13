@@ -40,7 +40,7 @@ public class WordSearchController
     public void start()
     {
 
-        board = new WordSearchBoard(height, width, wordsToHide, "2");
+        board = new WordSearchBoard(height, width, wordsToHide, "abcdefghijklmonpqrstuvwxyz1234567890");
         board.makeBoard();
         displayBoard(board.getBoard());
     }
