@@ -3,6 +3,7 @@ package wordsearch.controller;
 import java.util.List;
 import java.util.ArrayList;
 import wordsearch.model.WordSearchBoard;
+import wordsearch.view.WordSearchFrame;
 
 public class WordSearchController
 {
@@ -12,6 +13,8 @@ public class WordSearchController
     
     private int width;
     private int height;
+
+    private WordSearchFrame frame;
     
     public WordSearchController()
     {
@@ -20,6 +23,10 @@ public class WordSearchController
         height = 12;
 
         addWords(wordsToHide);
+
+        frame = new WordSearchFrame(this);
+
+        board = new WordSearchBoard(height, width, wordsToHide, "abcdefghijklmonpqrstuvwxyz1234567890");
     }
 
     /**
@@ -45,7 +52,12 @@ public class WordSearchController
         displayBoard(board.getBoard());
     }
     
-    
+
+    public String[][] getBoard()
+    {
+        board.makeBoard();
+        return board.getBoard();
+    }
     
 
 
