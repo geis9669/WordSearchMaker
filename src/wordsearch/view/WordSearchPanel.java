@@ -9,24 +9,25 @@ public class WordSearchPanel extends JPanel {
 
     private SpringLayout layout;
     private JTable wordSearchTable;
-    private JScrollPane wordBoard;
+    private JScrollPane TableScrollPane;
 
     public WordSearchPanel(WordSearchController controller)
     {
         super();
         this.controller = controller;
         this.layout = new SpringLayout();
-        this.wordSearchTable = new JTable();
+        this.wordSearchTable = new JTable(controller.getTableModel());
+        this.TableScrollPane = new JScrollPane(wordSearchTable);
 
 
         this.setLayout(null);//layout);
-        this.add(wordSearchTable);
+        this.add(TableScrollPane);
 
-        String[][] board = controller.getBoard(); // to get the board to show
+        //String[][] board = controller.getBoard(); // to get the board to show
+        //wordSearchTable.add();
 
-        wordSearchTable.(board);
 
-        wordSearchTable.setSize(400,400);
-        wordSearchTable.setLocation(10,10 );
+        TableScrollPane.setSize(400,400);
+        TableScrollPane.setLocation(10,10 );
     }
 }
