@@ -15,6 +15,10 @@ public class WordSearchPanel extends JPanel {
     private JTable wordSearchTable;
     private JScrollPane TableScrollPane;
     
+    private JLabel wordLabel;
+    private JScrollPane wordScrollPane;
+    private JTextArea wordArea;
+    
     private JLabel lettersLabel;
     private JTextArea lettersArea;
     
@@ -38,6 +42,17 @@ public class WordSearchPanel extends JPanel {
 
         TableScrollPane.setSize(400,400);
         TableScrollPane.setLocation(10,10 );
+        // sets up the place to enter the words to find
+        this.wordLabel = new JLabel("<html>Words to find<br>Separte them by new lines");
+        wordLabel.setSize(200, 30);
+        wordLabel.setLocation(410+10,10);
+        this.add(wordLabel);
+        this.wordArea = new JTextArea(); // empty is good
+        this.wordScrollPane = new JScrollPane(wordArea);
+        this.add(wordScrollPane);
+        wordScrollPane.setSize(200,200); // 200,200
+        wordScrollPane.setLocation(410 + 10, 10+wordLabel.getHeight()+wordLabel.getY());
+        
         // sets up the place to enter the random letters.
         this.lettersLabel = new JLabel("Random Letters");
         lettersLabel.setSize(wordLabel.getWidth(), 16);
