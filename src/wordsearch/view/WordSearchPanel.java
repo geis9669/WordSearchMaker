@@ -13,7 +13,7 @@ public class WordSearchPanel extends JPanel {
 
     private SpringLayout layout;
     private JTable wordSearchTable;
-    private JScrollPane TableScrollPane;
+    private JScrollPane wordSearchScrollPane;
     
     private JLabel wordLabel;
     private JScrollPane wordScrollPane;
