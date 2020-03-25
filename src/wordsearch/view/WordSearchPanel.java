@@ -29,19 +29,16 @@ public class WordSearchPanel extends JPanel {
         super();
         this.controller = controller;
         this.layout = new SpringLayout();
-        this.wordSearchTable = new JTable(controller.getTableModel());
-        this.TableScrollPane = new JScrollPane(wordSearchTable);
-
-
+        
         this.setLayout(null);//layout);
-        this.add(TableScrollPane);
-
-        //String[][] board = controller.getBoard(); // to get the board to show
-        //wordSearchTable.add();
-
-
-        TableScrollPane.setSize(400,400);
-        TableScrollPane.setLocation(10,10 );
+        
+        // sets up where the word search will appear
+        this.wordSearchTable = new JTable();
+        this.wordSearchScrollPane = new JScrollPane(wordSearchTable);
+        this.add(wordSearchScrollPane);
+        wordSearchScrollPane.setSize(400,400);
+        wordSearchScrollPane.setLocation(10,10 );
+        
         // sets up the place to enter the words to find
         this.wordLabel = new JLabel("<html>Words to find<br>Separte them by new lines");
         wordLabel.setSize(200, 30);
