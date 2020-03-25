@@ -17,7 +17,7 @@ public class WordSearchFrame extends JFrame {
 
         setTitle("Word Search Maker");
         setSize(800,800);
-        setResizable(false);
+        //setResizable(false);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
