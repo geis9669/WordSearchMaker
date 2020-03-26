@@ -34,13 +34,14 @@ public class WordSearchMaker
     {
         int height = 0;
         int width = 0;
-
+        System.out.print(wordsToHide.size());
         int smallestWord = Integer.MAX_VALUE;
     	int bigestWord = Integer.MIN_VALUE;
     	int requiredArea = 0;
     	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
     	for(String word : wordsToHide)
     	{
+    		System.out.println(word);
     		requiredArea += word.length();
     		if(word.length()> bigestWord)
     		{
@@ -189,7 +190,6 @@ public class WordSearchMaker
      */
     private void addWord(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
     {
-
         int row = startRow;
         int col = startCol;
 
@@ -225,8 +225,6 @@ public class WordSearchMaker
         }
         return results;
     }
-
-    
     
     /**
      * this gets a size for the words to put in the wordsearch
@@ -280,6 +278,5 @@ public class WordSearchMaker
     		height = bigestWord;
     		width = smallestWord;
     	}
-
     }
 }
