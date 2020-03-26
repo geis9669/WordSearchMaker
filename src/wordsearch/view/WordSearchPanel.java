@@ -69,9 +69,13 @@ public class WordSearchPanel extends JPanel {
         
         enterButton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    String words = wordArea.getText();
+			    String letters = lettersArea.getText();
+			    
+			    
 				System.out.println("enterButton Pressed");
 				//controller.getTableModel());
-//        enterArea.getText();
+				
 			}
         });
         
