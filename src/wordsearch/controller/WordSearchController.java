@@ -61,7 +61,7 @@ public class WordSearchController
     	
     	for(String charset: wordArray)
     	{
-    		System.out.println(charset);
+    		System.out.println("word  " +charset + "  " + words.length());
     	}
     	*/
     }    
@@ -115,6 +115,28 @@ public class WordSearchController
     		wordArray.add(words.substring(start,end));
     	}
     	return wordArray; 
+    }
+    
+    /*
+     * this method is to test separate words 
+     */
+    public void testSeparateWords()
+    {
+    	System.out.println("Test 1");
+    	String words = "greg,week,day,month,year";
+    	List<String> wordArray = separateWords(words, ",");
+    	for(String charset: wordArray)
+    	{
+    		System.out.println("word  " +charset + "  " + words.length());
+    	}
+    	
+    	System.out.println("Test 2");
+    	words = "";
+    	wordArray = separateWords(words, ",");
+    	for(String charset:wordArray)
+    	{
+    		System.out.println("word  " +charset + "  " + words.length());
+    	}
     }
 
 }
