@@ -49,10 +49,21 @@ public class WordSearchController
     
     public void start()
     {
-
+    	/*
         board = new WordSearchBoard(height, width, wordsToHide, "abcdefghijklmonpqrstuvwxyz1234567890");
         board.makeBoard();
         displayBoard(board.getBoard());
+    	*/
+    	/*
+    	String words = "greg,week,day,month,year";
+    	List<String> wordArray = separateWords(words, ",");
+    	
+    	for(String charset: wordArray)
+    	{
+    		System.out.println(charset);
+    	}
+    	*/
+    }    
 
     /**
      * this method makes a string of all the letters of the board and prints them to the console
