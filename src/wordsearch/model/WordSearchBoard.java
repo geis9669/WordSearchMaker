@@ -41,9 +41,34 @@ public class WordSearchBoard
     }
 
     
-    private void fixSize( List<String> words)
+    private void fixSize(List<String> words)
     {
-
+    	int height = 0;
+    	int width = 0;
+    	
+    	int smallestWord = Integer.MAX_VALUE;
+    	int bigestWord = Integer.MIN_VALUE;
+    	
+    	int requiredArea = 0;
+    	
+    	for(String word : words)
+    	{
+    		requiredArea += word.length();
+    		if(word.length()> bigestWord)
+    		{
+    			bigestWord = word.length();
+    		}
+    		if(word.length()< smallestWord)
+    		{
+    			smallestWord = word.length();
+    		}
+    	}
+    	
+    	int extraSpace = 0;// how much extra space is needed for a word search
+    	if(smallestWord * bigestWord > requiredArea+ extraSpace)
+    	{
+    		
+    	}
 
     }
 
