@@ -98,6 +98,11 @@ public class WordSearchController
 */
     public AbstractTableModel makeTableModel(String words, String letters)
     {
+    	if(letters.length()<= 0)
+    	{
+    		letters = "1";
+    	}
+    	
     	
         return  board.makeBoard(separateWords(words, ","),letters);
     }
