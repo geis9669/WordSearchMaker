@@ -43,6 +43,19 @@ public class WordSearchController
     public void start()
     {
     	/*
+    	ArrayList<String> list = new ArrayList<String>();
+    	addWords(list);
+    	WordSearchBoard board = new WordSearchBoard();
+    	WordSearchTableModel mywordSearch = board.makeBoard(list, "1");
+    	displayBoard(mywordSearch.getWordSearch());
+    	System.out.println("");
+    	List<String> wordsNotHid = mywordSearch.getWordsNotHid();
+    	for(String word: wordsNotHid)
+    	{
+    		System.out.println(word);
+    	}
+    	*/
+    	/*
         board = new WordSearchBoard(height, width, wordsToHide, "abcdefghijklmonpqrstuvwxyz1234567890");
         board.makeBoard();
         displayBoard(board.getBoard());
