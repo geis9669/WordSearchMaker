@@ -92,6 +92,21 @@ public class WordSearchController
         }
         System.out.print(toPrint);
     }
+    private List<String> separateWords(String words, String separator)
+    {
+    	List<String> wordArray = new ArrayList<>();
+    	int start = 0;
+    	int end = -1;
+    	words = words+",";
+    	while(end< words.length()-1)
+    	{
+    		start = end +1;
+    		end = words.indexOf(separator, start);
+    		wordArray.add(words.substring(start,end));
+    	}
+    	
+    	return wordArray; 
+    }
 
 }
 // February 21 2020
