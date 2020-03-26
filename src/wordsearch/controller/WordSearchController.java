@@ -106,13 +106,13 @@ public class WordSearchController
     {
     	List<String> wordArray = new ArrayList<>();
     	int start = 0;
-    	int end = -1;
-    	words = words+",";
+    	int end = 0;
+    	words = words+separator;
     	while(end< words.length()-1)
     	{
-    		start = end +1;
     		end = words.indexOf(separator, start);
     		wordArray.add(words.substring(start,end));
+    		start = end +1;
     	}
     	return wordArray; 
     }
