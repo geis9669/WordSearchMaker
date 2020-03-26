@@ -13,14 +13,6 @@ import java.util.ArrayList;
 
 public class WordSearchBoard
 {
-    private String[][] board;
-    
-    private List<String> wordsThatDidentFit;
-  
-    private List<String> wordsToHide;
-    private int height;
-    private int width;
-    private String randomLetters;
     
     private final List<IntPair> DIRECTIONS;
 
@@ -32,20 +24,8 @@ public class WordSearchBoard
      * @param randomLetters a string of all the possible characters that will fill empty space and if it has duplicate
      *                      then more likely they will be used.
      */
-    public WordSearchBoard(int height, int width, List<String> wordsToHide, String randomLetters)
-    {
-        this.height = height;
-        this.width = width;
-        this.wordsToHide = wordsToHide;
-
-        this.randomLetters = randomLetters;
-        if(this.randomLetters == null)
-        {
-            this.randomLetters = " ";
-        }
-        
-        this.wordsThatDidentFit = new ArrayList<>();
-
+    public WordSearchBoard()
+    {            
         List<IntPair> directions = new ArrayList<>(8);
         // fill the DIRECTIONS array with the DIRECTIONS I want to go
         int index = 0;
@@ -66,96 +46,28 @@ public class WordSearchBoard
     }
 
     
-    private void fixSize(int height, int width, List<String> words)
+    private void fixSize( List<String> words)
     {
 
 
     }
-
-    /**
-     * this will return the finished board or null if it isn't made
-     * @return the board or null
-     */
-    public String[][] getBoard()
-    {
-        return this.board;
-    }
-    
-    /**
-     * this will return the words that diden't fit for the most recent make of the board
-     * @return a list either empty or with words but not null
-     */
-    public List<String> getWordsThatdidentFit()
-    {
-        return this.wordsThatDidentFit;
-    }
-    
-    /**
-     * this will let you get the letters that will be all the blank spaces
-     * @return
-     */
-    public String getRandomLetters()
-    {
-        return randomLetters;
-    }
-
-
-    /**
-     * lets you set the letters 
-     * @param randomLetters
-     */
-    public void setRandomLetters(String randomLetters)
-    {
-        this.randomLetters = randomLetters;
-    }
-    
-    public List<String> getWordsToHide()
-    {
-        return wordsToHide;
-    }
-
-
-    public void setWordsToHide(List<String> wordsToHide)
-    {
-        this.wordsToHide = wordsToHide;
-    }
-
-
-    public int getHeight()
-    {
-        return height;
-    }
-    
-    public int getWidth()
-    {
-        return width;
-    }
-
-    public void setSize(int height, int width)
-    {
-        this.height = height;
-        this.width = width;
-    }
-
 
     
-
 
     // may return the board after it finishes or report problems
     /**
      * 
      */
-    public void makeBoard()
+    public WordSearchTableModel makeBoard(ArrayList<String> wordsToHide, String randomLetters)
     {
-        if(height <= 0 || width <= 0)
-        {
-            height = 0;
-            width = 0;
-        }
+        int height = 0;
+        int width = 0;
         
-        board = new String[height][width];
-        //List<String> wordsThatDidentFit = new ArrayList<>();
-        wordsThatDidentFit.clear();
+        
+        String[][] board = new String[height][width];
+        List<String> wordsThatDidentFit = new ArrayList<>();
+        
+        
         // makes a list of all the possible spots.
         List<IntPair> allPossibleSpots = new ArrayList<>();
         for(int row = 0; row<board.length; row++)
@@ -223,7 +135,7 @@ public class WordSearchBoard
             
         }
 
-        // maybe return what words don't fit in the board
+        return new WordSearchTableModel(board, wordsToHide, wordsThatDidentFit);
     }
 
 
