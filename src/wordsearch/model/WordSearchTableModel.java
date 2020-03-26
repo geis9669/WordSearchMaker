@@ -4,11 +4,11 @@ import javax.swing.table.AbstractTableModel;
 
 public class WordSearchTableModel extends AbstractTableModel
 {
-    private String[][] wordSearchBoard;
+    private String[][] wordSearch;
 
     public WordSearchTableModel(String[][] wordSearchBoard)
     {
-        this.wordSearchBoard = wordSearchBoard;
+        this.wordSearch = wordSearchBoard;
     }
 
     public String getColumnName(int c)
@@ -18,16 +18,21 @@ public class WordSearchTableModel extends AbstractTableModel
 
     @Override
     public int getRowCount() {
-        return wordSearchBoard.length;
+        return wordSearch.length;
     }
 
     @Override
     public int getColumnCount() {
-        return wordSearchBoard[0].length;
+        return wordSearch[0].length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return wordSearchBoard[rowIndex][columnIndex];
+        return wordSearch[rowIndex][columnIndex];
+    }
+    
+    public String[][] getWordSearch()
+    {
+    	return wordSearch;
     }
 }
