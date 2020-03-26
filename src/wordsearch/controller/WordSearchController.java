@@ -53,22 +53,6 @@ public class WordSearchController
         board = new WordSearchBoard(height, width, wordsToHide, "abcdefghijklmonpqrstuvwxyz1234567890");
         board.makeBoard();
         displayBoard(board.getBoard());
-    }
-    
-
-    public String[][] getBoard()
-    {
-        board.makeBoard();
-        return board.getBoard();
-    }
-
-    public AbstractTableModel getTableModel()
-    {
-        board.makeBoard();
-        return new WordSearchTableModel(board.getBoard());
-    }
-    
-
 
     /**
      * this method makes a string of all the letters of the board and prints them to the console
@@ -92,6 +76,22 @@ public class WordSearchController
         }
         System.out.print(toPrint);
     }
+    
+    
+    public String[][] getBoard()
+    {
+        board.makeBoard();
+        return board.getBoard();
+    }
+
+    public AbstractTableModel makeTableModel(String words, String letters)
+    {
+    	
+    	
+        board.makeBoard();
+        return new WordSearchTableModel(board.getBoard());
+    }
+    
     private List<String> separateWords(String words, String separator)
     {
     	List<String> wordArray = new ArrayList<>();
