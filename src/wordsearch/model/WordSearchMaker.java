@@ -2,24 +2,12 @@ package wordsearch.model;
 
 import java.util.List;
 import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.Collections;
-//import java.util.concurrent.CopyOnWriteArrayList;
 
-
-// this will take the size the user wants and then if any words won't fit in the board because they are too big it will
-//increase the size of the board for that
-// it will also make a list of unused words that wouldn't fit.
-
-public class WordSearchBoard
+public class WordSearchMaker
 {
-    
     private final List<IntPair> DIRECTIONS;
-
-    /**
-     *
-     */
-    public WordSearchBoard()
+    
+    public WordSearchMaker()
     {            
         List<IntPair> directions = new ArrayList<>(8);
         // fill the DIRECTIONS array with the DIRECTIONS I want to go
@@ -37,21 +25,21 @@ public class WordSearchBoard
         }
         DIRECTIONS = List.copyOf(directions);
         // done with filling the DIRECTIONS immutable list
-
     }
 
-    
-    private void fixSize(List<String> words)
+    /**
+     * 
+     */
+    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
     {
-    	int height = 0;
-    	int width = 0;
-    	
-    	int smallestWord = Integer.MAX_VALUE;
+        int height = 0;
+        int width = 0;
+
+        int smallestWord = Integer.MAX_VALUE;
     	int bigestWord = Integer.MIN_VALUE;
-    	
     	int requiredArea = 0;
-    	
-    	for(String word : words)
+    	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
+    	for(String word : wordsToHide)
     	{
     		requiredArea += word.length();
     		if(word.length()> bigestWord)
@@ -63,30 +51,33 @@ public class WordSearchBoard
     			smallestWord = word.length();
     		}
     	}
-    	
-    	int extraSpace = 0;// how much extra space is needed for a word search
-    	if(smallestWord * bigestWord > requiredArea+ extraSpace)
+    	// gets the height and width that will work for the board
+    	int extraSpace = requiredArea/4;// how much extra space is needed for a word search
+    	while(!(smallestWord * bigestWord > requiredArea + extraSpace))
+    		// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
     	{
-    		
+    		if((Math.random()*100)+1 < 60)
+    		{
+    			smallestWord += 1;
+    		}
+    		else
+    		{
+    			bigestWord += 1;
+    		}
     	}
-
-    }
-
-    
-
-    // may return the board after it finishes or report problems
-    /**
-     * 
-     */
-    public WordSearchTableModel makeBoard(ArrayList<String> wordsToHide, String randomLetters)
-    {
-        int height = 0;
-        int width = 0;
-        
-        
+    	if((Math.random()*2)+1 > 1)
+    	{
+    		height = smallestWord;
+    		width = bigestWord;
+    	}
+    	else
+    	{
+    		height = bigestWord;
+    		width = smallestWord;
+    	}
+    	
         String[][] board = new String[height][width];
         List<String> wordsThatDidentFit = new ArrayList<>();
-        
         
         // makes a list of all the possible spots.
         List<IntPair> allPossibleSpots = new ArrayList<>();
@@ -118,7 +109,6 @@ public class WordSearchBoard
                 // this loop goes through all the directions that the word can go.
                 while(!wordPlaced && possibleDirections.size() > 0) {
                     IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
-
                     //System.out.println(place.getFirst() + "  " + place.getSecond() + "  " + direction.getFirst() + "  " + direction.getSecond());
                     if(testRowDirection(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
                         addWord(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index));
@@ -135,9 +125,7 @@ public class WordSearchBoard
                     word += letter;
                 }
                 wordsThatDidentFit.add(word);
-                //System.out.println(wordsThatDidentFit);
             }
-
         }
         
         // sets the nulls to random characters 
@@ -151,14 +139,10 @@ public class WordSearchBoard
                     String character = randomLetters.substring(random, random+1);
                     board[row][col] = character;
                 }                
-            }
-            
+            }     
         }
-
         return new WordSearchTableModel(board, wordsToHide, wordsThatDidentFit);
     }
-
-
 
     /**
      * this method tests if a word will fit in the board
@@ -242,4 +226,60 @@ public class WordSearchBoard
         return results;
     }
 
+    
+    
+    /**
+     * this gets a size for the words to put in the wordsearch
+     * it makes sure there is enough room for all the words
+     * @param words to put in  a word search
+     */
+    public void getSizeForBoard(List<String> words)
+    {
+    	int height = 0;
+    	int width = 0;
+    	
+    	int smallestWord = Integer.MAX_VALUE;
+    	int bigestWord = Integer.MIN_VALUE;
+    	int requiredArea = 0;
+    	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
+    	for(String word : words)
+    	{
+    		requiredArea += word.length();
+    		if(word.length()> bigestWord)
+    		{
+    			bigestWord = word.length();
+    		}
+    		if(word.length()< smallestWord)
+    		{
+    			smallestWord = word.length();
+    		}
+    	}
+    	System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
+    	// gets the height and width that will work for the board
+    	int extraSpace = requiredArea/4;// how much extra space is needed for a word search
+    	while(!(smallestWord * bigestWord > requiredArea + extraSpace))
+    		// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
+    	{
+    		if((Math.random()*100)+1 < 60)
+    		{
+    			smallestWord += 1;
+    		}
+    		else
+    		{
+    			bigestWord += 1;
+    		}
+    	}
+    	System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea+", Extraspace"+extraSpace);	
+    	if((Math.random()*2)+1 > 1)
+    	{
+    		height = smallestWord;
+    		width = bigestWord;
+    	}
+    	else
+    	{
+    		height = bigestWord;
+    		width = smallestWord;
+    	}
+
+    }
 }
