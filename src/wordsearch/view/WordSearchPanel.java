@@ -1,6 +1,8 @@
 package wordsearch.view;
 
 import wordsearch.controller.WordSearchController;
+import wordsearch.model.WordSearchTableModel;
+
 import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
@@ -71,10 +73,10 @@ public class WordSearchPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			    String words = wordArea.getText();
 			    String letters = lettersArea.getText();
+			    WordSearchTableModel data = (WordSearchTableModel)controller.makeTableModel(words, letters);
 			    
+			    wordSearchTable.setModel(data);
 			    
-				System.out.println("enterButton Pressed");
-				//controller.getTableModel());
 				
 			}
         });
