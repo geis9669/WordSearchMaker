@@ -2,7 +2,7 @@ package wordsearch.controller;
 
 import java.util.List;
 import java.util.ArrayList;
-import wordsearch.model.WordSearchBoard;
+import wordsearch.model.WordSearchMaker;
 import wordsearch.model.WordSearchTableModel;
 import wordsearch.view.WordSearchFrame;
 
@@ -10,18 +10,13 @@ import javax.swing.table.AbstractTableModel;
 
 public class WordSearchController
 {
-    private WordSearchBoard board;
-
-    private List<String> wordsToHide;
-    
-    private int width;
-    private int height;
+    private WordSearchMaker board;
 
     private WordSearchFrame frame;
     
     public WordSearchController()
     {
-
+    	board = new WordSearchMaker();
         frame = new WordSearchFrame(this);
     }
 
@@ -100,15 +95,13 @@ public class WordSearchController
         board.makeBoard();
         return board.getBoard();
     }
-
+*/
     public AbstractTableModel makeTableModel(String words, String letters)
     {
     	
-    	
-        board.makeBoard();
-        return new WordSearchTableModel(board.getBoard());
+        return  board.makeBoard(separateWords(words, ","),letters);
     }
-  */  
+    
     private List<String> separateWords(String words, String separator)
     {
     	List<String> wordArray = new ArrayList<>();
@@ -121,7 +114,6 @@ public class WordSearchController
     		end = words.indexOf(separator, start);
     		wordArray.add(words.substring(start,end));
     	}
-    	
     	return wordArray; 
     }
 
