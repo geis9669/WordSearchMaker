@@ -89,13 +89,6 @@ public class WordSearchController
         System.out.print(toPrint);
     }
     
-/*    
-    public String[][] getBoard()
-    {
-        board.makeBoard();
-        return board.getBoard();
-    }
-*/
     public AbstractTableModel makeTableModel(String words, String letters)
     {
     	if(letters.length()<= 0)
