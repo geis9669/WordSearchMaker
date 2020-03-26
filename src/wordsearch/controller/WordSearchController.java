@@ -21,13 +21,6 @@ public class WordSearchController
     
     public WordSearchController()
     {
-        wordsToHide = new ArrayList<>();
-        width  = 12;
-        height = 12;
-
-        addWords(wordsToHide);
-
-        board = new WordSearchBoard(height, width, wordsToHide, "abcdefghijklmonpqrstuvwxyz1234567890");
 
         frame = new WordSearchFrame(this);
     }
@@ -88,7 +81,7 @@ public class WordSearchController
         System.out.print(toPrint);
     }
     
-    
+/*    
     public String[][] getBoard()
     {
         board.makeBoard();
@@ -102,7 +95,7 @@ public class WordSearchController
         board.makeBoard();
         return new WordSearchTableModel(board.getBoard());
     }
-    
+  */  
     private List<String> separateWords(String words, String separator)
     {
     	List<String> wordArray = new ArrayList<>();
