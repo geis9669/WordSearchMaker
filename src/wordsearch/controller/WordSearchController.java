@@ -97,7 +97,7 @@ public class WordSearchController
     	}
     	
     	
-        return  board.makeBoard(separateWords(words, ","),letters);
+        return  board.makeBoard(separateWords(words, "\n"),letters);
     }
     
     private List<String> separateWords(String words, String separator)
