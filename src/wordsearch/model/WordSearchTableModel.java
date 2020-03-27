@@ -30,6 +30,10 @@ public class WordSearchTableModel extends AbstractTableModel
 
     @Override
     public int getColumnCount() {
+    	if(wordSearch.length==0)
+    	{
+    		return 0;
+    	}
         return wordSearch[0].length;
     }
 
