@@ -30,18 +30,18 @@ public class WordSearchMaker
     /**
      * 
      */
+    // make it so I can have more of a square in my program
     public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
     {
         int height = 0;
         int width = 0;
-        System.out.print(wordsToHide.size());
-        int smallestWord = Integer.MAX_VALUE;
-    	int bigestWord = Integer.MIN_VALUE;
+        int smallestWord = Integer.MAX_VALUE/ 100;
+    	int bigestWord = 0;//Integer.MIN_VALUE;
     	int requiredArea = 0;
     	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
     	for(String word : wordsToHide)
     	{
-    		System.out.println(word);
+//    		System.out.println(word + "  this");
     		requiredArea += word.length();
     		if(word.length()> bigestWord)
     		{
@@ -54,9 +54,11 @@ public class WordSearchMaker
     	}
     	// gets the height and width that will work for the board
     	int extraSpace = requiredArea/4;// how much extra space is needed for a word search
-    	while(!(smallestWord * bigestWord > requiredArea + extraSpace))
+    	while(!(smallestWord * bigestWord >= requiredArea + extraSpace))
     		// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
     	{
+    		System.out.println("small "+smallestWord+", big "+ bigestWord+", together"+ 
+    	(smallestWord*bigestWord)+"\nTarget "+requiredArea+", extraspace "+extraSpace);
     		if((Math.random()*100)+1 < 60)
     		{
     			smallestWord += 1;
@@ -66,7 +68,7 @@ public class WordSearchMaker
     			bigestWord += 1;
     		}
     	}
-    	if((Math.random()*2)+1 > 1)
+    	if((Math.random()*100) >= 50)
     	{
     		height = smallestWord;
     		width = bigestWord;
