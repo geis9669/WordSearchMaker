@@ -232,18 +232,18 @@ public class WordSearchMaker
      * this gets a size for the words to put in the wordsearch
      * it makes sure there is enough room for all the words
      * @param words to put in  a word search
+     * @param height the desired height of the board
+     * @param width the desired width of the board
      */
-    public void getSizeForBoard(List<String> words)
+    public void getSizeForBoard(List<String> words, int height, int width)
     {
-    	int height = 0;
-    	int width = 0;
-    	
-    	int smallestWord = Integer.MAX_VALUE;
-    	int bigestWord = Integer.MIN_VALUE;
+        int smallestWord = Integer.MAX_VALUE/ 100;
+    	int bigestWord = 0;//Integer.MIN_VALUE;
     	int requiredArea = 0;
     	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
     	for(String word : words)
     	{
+//    		System.out.println(word + "  this");
     		requiredArea += word.length();
     		if(word.length()> bigestWord)
     		{
@@ -254,28 +254,42 @@ public class WordSearchMaker
     			smallestWord = word.length();
     		}
     	}
-    	System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
+    	//System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
     	// gets the height and width that will work for the board
-    	int extraSpace = requiredArea/4;// how much extra space is needed for a word search
-    	while(!(smallestWord * bigestWord > requiredArea + extraSpace))
-    		// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
+    	int extraSpace = requiredArea/4;// how much extra space is needed for a word search   	
+    	if(height <= 0 && width <= 0)
     	{
-    		if((Math.random()*100)+1 < 60)
-    		{
-    			smallestWord += 1;
-    		}
-    		else
-    		{
-    			bigestWord += 1;
-    		}
+    		IntPair  temp = growSizeToFit(smallestWord, bigestWord, requiredArea+extraSpace, 60);
+    		if((Math.random()*100) >= 50)
+        	{
+        		height = temp.getFirst();
+        		width = temp.getSecond();
+        	}
+        	else
+        	{
+        		height = temp.getSecond();
+        		width = temp.getFirst();
+        	}
     	}
-    	System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea+", Extraspace"+extraSpace);	
-    	if((Math.random()*2)+1 > 1)
+    	else 
     	{
-    		height = smallestWord;
-    		width = bigestWord;
+    		int biased = 50;
+    		if(width < height)
+    		{
+    			biased += 10;
+    		}
+    		if(width>height)
+    		{
+    			biased -= 10;
+    		}
+    		IntPair temp = growSizeToFit(width, height, requiredArea+extraSpace, biased);
+    		width = temp.getFirst();
+    		height = temp.getSecond();
     	}
-    	else
+    	System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ 
+    	  (smallestWord*bigestWord)+"\nTarget"+requiredArea+", Extraspace"+extraSpace);	
+    }
+    
     private IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
     {
     	while(!(first * second >= requiredArea ))// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
