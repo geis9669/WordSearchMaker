@@ -26,7 +26,10 @@ public class WordSearchMaker
         DIRECTIONS = List.copyOf(directions);
         // done with filling the DIRECTIONS immutable list
     }
-
+    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
+    {
+    	return makeBoard(wordsToHide, randomLetters, 0, 0);
+    }
     /**
      * 
      */
