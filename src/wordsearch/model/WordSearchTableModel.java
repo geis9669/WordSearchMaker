@@ -18,6 +18,12 @@ public class WordSearchTableModel extends AbstractTableModel
         this.wordsNotHid = wordsNotHid;
     }
 
+    public String getRowName(int r)
+    {
+    	return r+1+"";
+    }
+    
+    @Override
     public String getColumnName(int c)
     {
         return c+1+"";
