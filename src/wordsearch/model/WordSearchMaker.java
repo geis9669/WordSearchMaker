@@ -276,9 +276,21 @@ public class WordSearchMaker
     		width = bigestWord;
     	}
     	else
+    private IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
+    {
+    	while(!(first * second >= requiredArea ))// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
     	{
-    		height = bigestWord;
-    		width = smallestWord;
+    		//System.out.println("small "+smallestWord+", big "+ bigestWord+", together"+ 
+    	       //(smallestWord*bigestWord)+"\nTarget "+requiredArea+", extraspace "+extraSpace);
+    		if((Math.random()*100)+1 <= biased)
+    		{
+    			first += 1;
+    		}
+    		else
+    		{
+    			second += 1;
+    		}
     	}
+    	return new IntPair(first, second);
     }
 }
