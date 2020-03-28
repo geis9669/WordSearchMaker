@@ -151,6 +151,32 @@ public class WordSearchMaker
         }
         return new WordSearchTableModel(board, wordsToHide, wordsThatDidentFit);
     }
+    
+    /**
+     * grows the first and second by one until their area is greater then the required area
+     * @param first size to grow
+     * @param second size to grow
+     * @param requiredArea how much area you want covered
+     * @param biased how often one will grow while the other doen't
+     * @return a IntPair for both the first and second numbers
+     */
+    private IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
+    {
+    	while(!(first * second >= requiredArea ))// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
+    	{
+    		//System.out.println("small "+smallestWord+", big "+ bigestWord+", together"+ 
+    	       //(smallestWord*bigestWord)+"\nTarget "+requiredArea+", extraspace "+extraSpace);
+    		if((Math.random()*100)+1 <= biased)
+    		{
+    			first += 1;
+    		}
+    		else
+    		{
+    			second += 1;
+    		}
+    	}
+    	return new IntPair(first, second);
+    }
 
     /**
      * this method tests if a word will fit in the board
@@ -295,21 +321,5 @@ public class WordSearchMaker
     	  (smallestWord*bigestWord)+"\nTarget"+requiredArea+", Extraspace"+extraSpace);	
     }
     
-    private IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
-    {
-    	while(!(first * second >= requiredArea ))// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
-    	{
-    		//System.out.println("small "+smallestWord+", big "+ bigestWord+", together"+ 
-    	       //(smallestWord*bigestWord)+"\nTarget "+requiredArea+", extraspace "+extraSpace);
-    		if((Math.random()*100)+1 <= biased)
-    		{
-    			first += 1;
-    		}
-    		else
-    		{
-    			second += 1;
-    		}
-    	}
-    	return new IntPair(first, second);
-    }
+   
 }
