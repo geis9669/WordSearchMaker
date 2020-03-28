@@ -31,11 +31,9 @@ public class WordSearchMaker
      * 
      */
     // make it so I can have more of a square in my program
-    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
+    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int height, int width)
     {
-        int height = 0;
-        int width = 0;
-        int smallestWord = Integer.MAX_VALUE/ 100;
+    	int smallestWord = Integer.MAX_VALUE/100;
     	int bigestWord = 0;//Integer.MIN_VALUE;
     	int requiredArea = 0;
     	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
@@ -52,31 +50,37 @@ public class WordSearchMaker
     			smallestWord = word.length();
     		}
     	}
+    	//System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
     	// gets the height and width that will work for the board
-    	int extraSpace = requiredArea/4;// how much extra space is needed for a word search
-    	while(!(smallestWord * bigestWord >= requiredArea + extraSpace))
-    		// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
+    	int extraSpace = requiredArea/4;// how much extra space is needed for the word search   	
+    	if(height <= 0 && width <= 0)
     	{
-    		System.out.println("small "+smallestWord+", big "+ bigestWord+", together"+ 
-    	(smallestWord*bigestWord)+"\nTarget "+requiredArea+", extraspace "+extraSpace);
-    		if((Math.random()*100)+1 < 60)
-    		{
-    			smallestWord += 1;
-    		}
-    		else
-    		{
-    			bigestWord += 1;
-    		}
+    		IntPair  temp = growSizeToFit(smallestWord, bigestWord, requiredArea+extraSpace, 60);
+    		if((Math.random()*100) >= 50)
+        	{
+        		height = temp.getFirst();
+        		width = temp.getSecond();
+        	}
+        	else
+        	{
+        		height = temp.getSecond();
+        		width = temp.getFirst();
+        	}
     	}
-    	if((Math.random()*100) >= 50)
+    	else 
     	{
-    		height = smallestWord;
-    		width = bigestWord;
-    	}
-    	else
-    	{
-    		height = bigestWord;
-    		width = smallestWord;
+    		int biased = 50;
+    		if(width < height)
+    		{
+    			biased += 10;
+    		}
+    		if(width>height)
+    		{
+    			biased -= 10;
+    		}
+    		IntPair temp = growSizeToFit(width, height, requiredArea+extraSpace, biased);
+    		width = temp.getFirst();
+    		height = temp.getSecond();
     	}
     	
         String[][] board = new String[height][width];
@@ -119,7 +123,6 @@ public class WordSearchMaker
                     }
                 }
             }
-
             if(!wordPlaced)
             {
                 String word = "";
@@ -130,7 +133,6 @@ public class WordSearchMaker
                 wordsThatDidentFit.add(word);
             }
         }
-        
         // sets the nulls to random characters 
         for(int row= 0; row< board.length; row++)
         { 
