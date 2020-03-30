@@ -37,9 +37,9 @@ public class WordSearchPanel extends JPanel {
         // sets up where the word search will appear
         this.wordSearchTable = new JTable();
         this.wordSearchScrollPane = new JScrollPane(wordSearchTable);
-        this.add(wordSearchScrollPane);
         wordSearchScrollPane.setSize(400,400);
-        wordSearchScrollPane.setLocation(10,10 );
+        wordSearchScrollPane.setLocation(10,10);
+        this.add(wordSearchScrollPane);
         
         // sets up the place to enter the words to find
         this.wordLabel = new JLabel("<html>Words to find<br>Separte them by new lines");
@@ -48,9 +48,9 @@ public class WordSearchPanel extends JPanel {
         this.add(wordLabel);
         this.wordArea = new JTextArea(); // empty is good
         this.wordScrollPane = new JScrollPane(wordArea);
-        this.add(wordScrollPane);
         wordScrollPane.setSize(200,200); // 200,200
         wordScrollPane.setLocation(410 + 10, 10+wordLabel.getHeight()+wordLabel.getY());
+        this.add(wordScrollPane);
         
         // sets up the place to enter the random letters.
         this.lettersLabel = new JLabel("Random Letters");
@@ -67,8 +67,7 @@ public class WordSearchPanel extends JPanel {
         enterButton = new JButton("Make WordSearch");
         add(enterButton);
         enterButton.setSize(140,16);
-        enterButton.setLocation(10,450);
-        
+        enterButton.setLocation(10,450);   
         enterButton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    String words = wordArea.getText();
