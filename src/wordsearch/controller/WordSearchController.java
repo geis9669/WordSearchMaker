@@ -99,6 +99,22 @@ public class WordSearchController
     	
         return  board.makeBoard(separateWords(words, "\n"),letters, 0, 0);
     }
+
+    /**
+     * 
+     * @param number to make a int
+     * @return either the number from the string or zero
+     */
+	private int convertToInt(String number) {
+		try
+    	{
+    		return Integer.parseInt(number);
+    	}
+    	catch(NumberFormatException error)
+    	{
+    		return 0;
+    	}
+	}
     
     private List<String> separateWords(String words, String separator)
     {
