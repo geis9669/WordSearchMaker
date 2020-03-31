@@ -63,6 +63,52 @@ public class WordSearchPanel extends JPanel {
         		10 +lettersLabel.getHeight()+lettersLabel.getY());
         this.add(lettersArea);
         
+      //sets up the place to enter the width and height for the board.
+        KeyAdapter numValidator = new KeyAdapter() {
+        	public void keyPressed(KeyEvent key)
+        	{  		
+        		JTextField field = (JTextField) key.getSource();
+        		if(key.getKeyChar() >= '0' && key.getKeyChar()<= '9'|| key.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+        		{
+        			field.setEditable(true);
+        			errorLabel.setText("");
+        		}else {
+        			field.setEditable(false);
+        			errorLabel.setText("* Enter only numeric digits(0-9)");
+        		}
+        	}
+        };  
+        
+        widthLabel = new JLabel("Width");
+        widthLabel.setSize(50,20);
+        widthLabel.setLocation(lettersArea.getX(),
+        		lettersArea.getHeight()+lettersArea.getY());
+        add(widthLabel);
+        widthField = new JTextField("", 25);
+        widthField.addKeyListener(numValidator);
+        widthField.setSize(widthLabel.getWidth(), widthLabel.getHeight());
+        widthField.setLocation(widthLabel.getX(),
+        		widthLabel.getY()+widthLabel.getHeight());
+        add(widthField);
+        
+        heightLabel = new JLabel("Height");
+        heightLabel.setSize(widthLabel.getWidth(), widthLabel.getHeight());
+        heightLabel.setLocation(widthLabel.getX()+widthLabel.getWidth()+10,
+        		widthLabel.getY());
+        add(heightLabel);
+        heightField = new JTextField(25);        
+        add(heightField);
+        heightField.addKeyListener(numValidator);
+        heightField.setSize(heightLabel.getWidth(),heightLabel.getHeight());
+        heightField.setLocation(heightLabel.getX(),
+        		heightLabel.getHeight()+heightLabel.getY());
+
+        errorLabel = new JLabel();
+        add(errorLabel);
+        errorLabel.setSize(180, 25);
+        errorLabel.setLocation(widthField.getX(),
+        		heightField.getHeight()+heightField.getY());
+        
         // sets up the button to make the word search
         enterButton = new JButton("Make WordSearch");
         add(enterButton);
