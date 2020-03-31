@@ -89,15 +89,14 @@ public class WordSearchController
         System.out.print(toPrint);
     }
     
-    public AbstractTableModel makeTableModel(String words, String letters)
+    public WordSearchTableModel makeTableModel(String words, String letters, String width, String height)
     {
     	if(letters.length()<= 0)
     	{
     		letters = "1";
     	}
     	
-    	
-        return  board.makeBoard(separateWords(words, "\n"),letters, 0, 0);
+        return  board.makeBoard(separateWords(words, "\n"),letters, convertToInt(width), convertToInt(height));
     }
 
     /**
