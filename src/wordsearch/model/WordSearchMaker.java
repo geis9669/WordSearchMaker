@@ -34,7 +34,7 @@ public class WordSearchMaker
      * 
      */
     // make it so I can have more of a square in my program
-    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int height, int width)
+    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
     	int bigestWord = 0;
