@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Dimension;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -23,6 +27,12 @@ public class WordSearchPanel extends JPanel {
     
     private JLabel lettersLabel;
     private JTextArea lettersArea;
+    
+    private JTextField heightField;
+    private JLabel heightLabel;
+    private JTextField widthField;
+    private JLabel widthLabel;
+    private JLabel errorLabel;
     
     private JButton enterButton;
 
@@ -54,7 +64,6 @@ public class WordSearchPanel extends JPanel {
         
         // sets up the place to enter the random letters.
         this.lettersLabel = new JLabel("Random Letters");
-        lettersLabel.setSize(wordLabel.getWidth(), 16);
         lettersLabel.setLocation(410+10, 10+wordScrollPane.getY()+wordScrollPane.getHeight());
         add(lettersLabel);
         this.lettersArea = new JTextArea("abcdefghijklmnopqrstuvwxyz",3,28);
