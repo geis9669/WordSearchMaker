@@ -129,7 +129,7 @@ public class WordSearchPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			    String words = wordArea.getText();
 			    String letters = lettersArea.getText();
-			    WordSearchTableModel data = (WordSearchTableModel)controller.makeTableModel(words, letters);
+			    WordSearchTableModel data = controller.makeTableModel(words, letters, widthField.getText(), heightField.getText());
 			    
 			    wordSearchTable.setModel(data);
 			    
