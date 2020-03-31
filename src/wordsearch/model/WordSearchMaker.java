@@ -37,7 +37,7 @@ public class WordSearchMaker
     public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int height, int width)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
-    	int bigestWord = 0;//Integer.MIN_VALUE;
+    	int bigestWord = 0;
     	int requiredArea = 0;
     	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
     	for(String word : wordsToHide)
@@ -55,7 +55,7 @@ public class WordSearchMaker
     	}
     	//System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
     	// gets the height and width that will work for the board
-    	int extraSpace = requiredArea/4;// how much extra space is needed for the word search   	
+    	int extraSpace = requiredArea/4;  	
     	if(height <= 0 && width <= 0)
     	{
     		IntPair  temp = growSizeToFit(smallestWord, bigestWord, requiredArea+extraSpace, 60);
@@ -72,6 +72,17 @@ public class WordSearchMaker
     	}
     	else 
     	{
+    		if(width<bigestWord&&height<bigestWord) {
+    			if(width>=height)
+    			{
+    				height = width;
+    				width = bigestWord;
+    			}else {
+    				width = height;
+    				height = bigestWord;
+    			}
+    		}
+    		
     		int biased = 50;
     		if(width < height)
     		{
@@ -304,6 +315,16 @@ public class WordSearchMaker
     	}
     	else 
     	{
+    		if(width<bigestWord&&height<bigestWord) {
+    			if(width>=height)
+    			{
+    				height = width;
+    				width = bigestWord;
+    			}else {
+    				width = height;
+    				height = bigestWord;
+    			}
+    		}
     		int biased = 50;
     		if(width < height)
     		{
