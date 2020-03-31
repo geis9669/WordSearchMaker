@@ -52,11 +52,11 @@ public class WordSearchPanel extends JPanel {
         this.add(wordSearchScrollPane);
         
         // sets up the place to enter the words to find
-        this.wordLabel = new JLabel("<html>Words to find<br>Separte them by new lines");
+        this.wordLabel = new JLabel("<html>Words to find<br>Each line is a word");
         wordLabel.setSize(200, 30);
         wordLabel.setLocation(410+10,10);
         this.add(wordLabel);
-        this.wordArea = new JTextArea(); // empty is good
+        this.wordArea = new JTextArea(); 
         this.wordScrollPane = new JScrollPane(wordArea);
         wordScrollPane.setSize(200,200); // 200,200
         wordScrollPane.setLocation(410 + 10, 10+wordLabel.getHeight()+wordLabel.getY());
@@ -64,12 +64,14 @@ public class WordSearchPanel extends JPanel {
         
         // sets up the place to enter the random letters.
         this.lettersLabel = new JLabel("Random Letters");
-        lettersLabel.setLocation(410+10, 10+wordScrollPane.getY()+wordScrollPane.getHeight());
+        lettersLabel.setSize(wordLabel.getWidth(), 25);
+        lettersLabel.setLocation(10+ wordSearchScrollPane.getWidth()+wordSearchScrollPane.getX(),
+        		10+wordScrollPane.getY()+wordScrollPane.getHeight());
         add(lettersLabel);
         this.lettersArea = new JTextArea("abcdefghijklmnopqrstuvwxyz",3,28);
         lettersArea.setSize(wordLabel.getWidth(), 50);
-        lettersArea.setLocation(10+ wordSearchScrollPane.getWidth()+wordSearchScrollPane.getX(), 
-        		10 +lettersLabel.getHeight()+lettersLabel.getY());
+        lettersArea.setLocation(lettersLabel.getX(), 
+        		lettersLabel.getHeight()+lettersLabel.getY());
         this.add(lettersArea);
         
       //sets up the place to enter the width and height for the board.
