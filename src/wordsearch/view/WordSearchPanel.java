@@ -14,7 +14,7 @@ public class WordSearchPanel extends JPanel {
     private WordSearchController controller;
 
     private SpringLayout layout;
-    private JTable wordSearchTable;
+    private WordSearchTable wordSearchTable;
     private JScrollPane wordSearchScrollPane;
     
     private JLabel wordLabel;
@@ -41,7 +41,8 @@ public class WordSearchPanel extends JPanel {
         this.setLayout(null);//layout);
         
         // sets up where the word search will appear
-        this.wordSearchTable = new JTable();
+        this.wordSearchTable = new WordSearchTable();
+        wordSearchTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         this.wordSearchScrollPane = new JScrollPane(wordSearchTable);
         wordSearchScrollPane.setSize(400,400);
         wordSearchScrollPane.setLocation(10,10);
@@ -128,6 +129,33 @@ public class WordSearchPanel extends JPanel {
 			    WordSearchTableModel data = controller.makeTableModel(words, letters, widthField.getText(), heightField.getText());
 			    
 			    wordSearchTable.setModel(data);
+			    
+//			    TableColumn aColumn = new TableColumn(0);
+//			    aColumn.setHeaderValue("0");
+//			    wordSearchTable.addColumn(aColumn);
+//			    wordSearchTable.moveColumn(wordSearchTable.getColumnCount()-1, 0);
+			    
+			    int width = 25;
+//			    JViewport rowHeader = new JViewport();
+//			    wordSearchScrollPane.setRowHeader(rowHeader);
+//			    
+			    String[] rowHeaders = new String[wordSearchTable.getRowCount()];
+			    for(int row =0; row<wordSearchTable.getRowCount(); row++)
+			    {
+			    	rowHeaders[row] = "" +row;
+			    }
+			    JList<String> myList = new JList<String>(rowHeaders);
+			    myList.setLayoutOrientation(JList.VERTICAL);
+			    myList.setPreferredSize(new Dimension(width, 1000));
+			    wordSearchScrollPane.setRowHeaderView(myList);
+			    for(int col =0; col<wordSearchTable.getColumnCount() ;col++)
+			    {
+			    	TableColumn column = wordSearchTable.getColumnModel().getColumn(col);
+			    	column.setMinWidth(width);
+			    	column.setMaxWidth(width);
+			    	column.setPreferredWidth(width);
+			    }
+			    
 			    
 				
 			}
