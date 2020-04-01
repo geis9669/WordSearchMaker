@@ -40,6 +40,7 @@ public class WordSearchPanel extends JPanel {
         
         // sets up where the word search will appear
         this.wordSearchTable = new JTable();
+        wordSearchTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         this.wordSearchScrollPane = new JScrollPane(wordSearchTable);
         wordSearchScrollPane.setSize(400,400);
         wordSearchScrollPane.setLocation(10,10);
