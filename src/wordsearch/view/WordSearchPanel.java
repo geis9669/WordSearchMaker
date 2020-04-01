@@ -3,15 +3,9 @@ package wordsearch.view;
 import wordsearch.controller.WordSearchController;
 import wordsearch.model.WordSearchTableModel;
 
-import javax.swing.JPanel;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Dimension;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class WordSearchPanel extends JPanel {
