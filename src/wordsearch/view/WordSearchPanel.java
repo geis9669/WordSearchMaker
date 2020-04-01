@@ -126,8 +126,14 @@ public class WordSearchPanel extends JPanel {
 			    WordSearchTableModel data = controller.makeTableModel(words, letters, widthField.getText(), heightField.getText());
 			    
 			    wordSearchTable.setModel(data);
-			    
-				
+			    int width = 25;
+			    for(int col =0; col<wordSearchTable.getColumnCount() ;col++)
+			    {
+			    	TableColumn column = wordSearchTable.getColumnModel().getColumn(col);
+			    	column.setMinWidth(width);
+			    	column.setMaxWidth(width);
+			    	column.setPreferredWidth(width);
+			    }
 			}
         });
         
