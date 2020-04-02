@@ -140,5 +140,26 @@ public class WordSearchPanel extends JPanel {
 			}
         });
         
+    private String getPathToSave()
+    {
+    	return getPathToSave(null);
+    }
+    
+    private String getPathToSave(String startPath)
+    {
+    	String path = ".";
+    	int result = -993;
+    	JFileChooser fileChooser = new JFileChooser();
+    	if(startPath != null)
+    	{
+    		fileChooser.setCurrentDirectory(new File(startPath));
+    	}
+    	fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    	result = fileChooser.showSaveDialog(this);
+    	if(result == JFileChooser.APPROVE_OPTION)
+    	{
+    		path = fileChooser.getCurrentDirectory().getAbsolutePath();
+    	}
+    	return path;
     }
 }
