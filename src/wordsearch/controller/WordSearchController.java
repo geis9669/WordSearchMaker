@@ -129,6 +129,11 @@ public class WordSearchController
     	return wordArray; 
     }
     
+    public void handleErrors(Exception error)
+    {
+    	JOptionPane.showMessageDialog(frame, error.getMessage());
+    }
+    
     /*
      * this method is to test separate words 
      */
