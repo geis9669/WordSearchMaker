@@ -96,6 +96,8 @@ public class WordSearchController
     	}
     	
         return  board.makeBoard(separateWords(words, "\n"),letters, convertToInt(width), convertToInt(height));
+    	int width1 = convertStringToInt(width);
+    	int height1 = convertStringToInt(height);
     }
 
     /**
@@ -103,7 +105,7 @@ public class WordSearchController
      * @param number to make a int
      * @return either the number from the string or zero
      */
-	private int convertToInt(String number) {
+	private int convertStringToInt(String number) {
 		try
     	{
     		return Integer.parseInt(number);
