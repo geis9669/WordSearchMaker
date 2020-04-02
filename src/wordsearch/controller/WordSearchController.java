@@ -1,10 +1,9 @@
 package wordsearch.controller;
 
-import java.util.List;
-import java.util.ArrayList;
-import wordsearch.model.WordSearchMaker;
-import wordsearch.model.WordSearchTableModel;
+import java.util.*;
+import wordsearch.model.*;
 import wordsearch.view.WordSearchFrame;
+import javax.swing.*;
 
 import javax.swing.table.AbstractTableModel;
 
