@@ -14,6 +14,7 @@ public class Output {
 		// builds the file name that will be saved
 		filename += "/"+date.getMonth()+" " + date.getDayOfMonth()+" ";
 		filename += date.getHour() + "-" + date.getMinute();
+		filename += " WordSearch.txt";
 		File saveFile = new File(filename);
 		
 		try(Scanner textScanner = new Scanner(textToSave); PrintWriter saveText = new PrintWriter(saveFile))
