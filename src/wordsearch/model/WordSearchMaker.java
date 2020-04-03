@@ -97,7 +97,7 @@ public class WordSearchMaker
     		height = temp.getSecond();
     	}
     	
-        String[][] board = new String[height][width];
+        String[][] board = new String[height][width];// make sure the size will actually fit
         List<String> wordsThatDidentFit = new ArrayList<>();
         
         // makes a list of all the possible spots.
