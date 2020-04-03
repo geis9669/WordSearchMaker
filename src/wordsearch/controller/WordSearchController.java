@@ -133,6 +133,56 @@ public class WordSearchController
     	return wordArray; 
     }
     
+    public void saveBoard(WordSearchTableModel data, String path)
+    {
+    	String newLine = "\n";
+    	String textToSave=newLine;
+    	String[][] board = data.getWordSearch();
+    	
+    	for(int row = 0; row<board.length; row++) 
+    	{
+    		for(int col =0; col<board[0].length; col++)
+    		{
+    			if(col != 0)
+    				textToSave+= " ";
+    			textToSave += board[row][col];
+    		}
+    		textToSave += newLine;
+    	}
+    	textToSave += newLine;
+    	
+    	List<String> words = data.getWordsHid();
+    	List<String> wordsNotHid = data.getWordsNotHid();
+    	
+    	final int lineLength = 80;
+    	int currentLength = 0;
+    	for(String word: words)
+    	{
+    		if(wordsNotHid.contains(word))
+    		{
+    			wordsNotHid.remove(word);
+    		}
+    		else
+    		{
+    			if(currentLength +1+ word.length() > lineLength)
+    			{
+    				textToSave+=newLine;
+    				currentLength = 0;
+    			}
+    			if(currentLength != 0)
+    			{
+    				textToSave += " ";
+    				currentLength += 1;
+    			}
+    			textToSave += word;
+    			currentLength += word.length();
+    		}
+    		
+    	}
+    	
+    	Output.saveText(this, path, textToSave);
+    }
+    
     public void handleErrors(Exception error)
     {
     	JOptionPane.showMessageDialog(frame, error.getMessage());
