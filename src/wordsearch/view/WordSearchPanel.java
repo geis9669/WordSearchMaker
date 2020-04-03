@@ -3,7 +3,8 @@ package wordsearch.view;
 import wordsearch.controller.WordSearchController;
 import wordsearch.model.WordSearchTableModel;
 
-import javax.swing.table.TableColumn;
+import java.util.List;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -20,6 +21,10 @@ public class WordSearchPanel extends JPanel {
     private JLabel wordLabel;
     private JScrollPane wordScrollPane;
     private JTextArea wordArea;
+    
+    private JLabel notHidLabel;
+    private JScrollPane notHidScrollPane;
+    private JTextArea notHidArea;
     
     private JLabel lettersLabel;
     private JTextArea lettersArea;
@@ -53,20 +58,38 @@ public class WordSearchPanel extends JPanel {
         
         // sets up the place to enter the words to find
         this.wordLabel = new JLabel("<html>Words to find<br>Each line is a word");
-        wordLabel.setSize(200, 30);
-        wordLabel.setLocation(410+10,10);
+        wordLabel.setSize(160, 30);
+        wordLabel.setLocation(wordSearchScrollPane.getWidth()+wordSearchScrollPane.getX()+10,
+        		10);
         this.add(wordLabel);
         this.wordArea = new JTextArea(); 
         this.wordScrollPane = new JScrollPane(wordArea);
-        wordScrollPane.setSize(200,200); // 200,200
-        wordScrollPane.setLocation(410 + 10, 10+wordLabel.getHeight()+wordLabel.getY());
+        wordScrollPane.setSize(wordLabel.getWidth(),200); // 200,200
+        wordScrollPane.setLocation(wordSearchScrollPane.getWidth()+wordSearchScrollPane.getX()+10,
+        		wordLabel.getHeight()+wordLabel.getY());
         this.add(wordScrollPane);
+        
+        // sets up the place to show which words did not make it in to the wordSearch
+        notHidLabel = new JLabel("Words that were not hidden");
+        notHidLabel.setSize(wordLabel.getSize());
+        notHidLabel.setLocation(wordLabel.getX()+wordLabel.getWidth()+10,
+        		10);
+        notHidLabel.setVisible(false);
+        add(notHidLabel);
+        notHidArea = new JTextArea();
+        notHidArea.setEditable(false);
+        notHidScrollPane = new JScrollPane(notHidArea);
+        notHidScrollPane.setSize(wordScrollPane.getSize());
+        notHidScrollPane.setLocation(notHidLabel.getX(), 
+        		notHidLabel.getY()+notHidLabel.getHeight());
+        notHidScrollPane.setVisible(false);
+        add(notHidScrollPane);
         
         // sets up the place to enter the random letters.
         this.lettersLabel = new JLabel("Random Letters");
         lettersLabel.setSize(wordLabel.getWidth(), 25);
         lettersLabel.setLocation(10+ wordSearchScrollPane.getWidth()+wordSearchScrollPane.getX(),
-        		10+wordScrollPane.getY()+wordScrollPane.getHeight());
+        		wordScrollPane.getY()+wordScrollPane.getHeight());
         add(lettersLabel);
         this.lettersArea = new JTextArea("abcdefghijklmnopqrstuvwxyz",3,28);
         lettersArea.setSize(wordLabel.getWidth(), 50);
@@ -132,6 +155,22 @@ public class WordSearchPanel extends JPanel {
 			    String words = wordArea.getText();
 			    String letters = lettersArea.getText();
 			    WordSearchTableModel data = controller.makeTableModel(words, letters, widthField.getText(), heightField.getText());
+			    
+			    List<String> wordsNotHid = data.getWordsNotHid();
+			    notHidArea.setText("");
+			    notHidScrollPane.setVisible(false);
+			    notHidLabel.setVisible(false);
+			    if(wordsNotHid.size()>0)
+			    {
+			    	String notHidWords = "";
+			    	for(String word : wordsNotHid)
+			    	{
+			    		notHidWords += word+"\n";
+			    	}
+			    	notHidArea.setText(notHidWords);
+			    	notHidScrollPane.setVisible(true);
+			    	notHidLabel.setVisible(true);
+			    }
 			    
 			    wordSearchTable.setModel(data);
 			    int width = 25;
