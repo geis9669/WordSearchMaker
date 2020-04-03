@@ -6,6 +6,8 @@ import wordsearch.model.WordSearchTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import javax.swing.table.TableColumn;
 import javax.swing.*;
 
 public class WordSearchPanel extends JPanel {
@@ -29,6 +31,9 @@ public class WordSearchPanel extends JPanel {
     private JLabel errorLabel;
     
     private JButton enterButton;
+    
+    private JButton saveButton;
+    private String lastPath;
 
     public WordSearchPanel(WordSearchController controller)
     {
@@ -140,6 +145,23 @@ public class WordSearchPanel extends JPanel {
 			}
         });
         
+        //sets up the button to save the made word search
+        saveButton = new JButton("Save WordSearch");
+        saveButton.setSize(enterButton.getSize());
+        saveButton.setLocation(enterButton.getX()+enterButton.getWidth()+10,
+        		enterButton.getY());
+        saveButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent event) {
+        		
+        		String path = getPathToSave();
+        		WordSearchTableModel data = (WordSearchTableModel) wordSearchTable.getModel();
+        		
+        		controller.saveBoard(data, path);
+        	}
+        });
+        add(saveButton);
+    }
+    
     private String getPathToSave()
     {
     	return getPathToSave(null);
