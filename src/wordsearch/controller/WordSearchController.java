@@ -5,7 +5,6 @@ import wordsearch.model.*;
 import wordsearch.view.WordSearchFrame;
 import javax.swing.*;
 
-import javax.swing.table.AbstractTableModel;
 
 public class WordSearchController
 {
@@ -63,6 +62,7 @@ public class WordSearchController
     		System.out.println("word  " +charset + "  " + words.length());
     	}
     	*/
+    	
     }    
 
     /**
