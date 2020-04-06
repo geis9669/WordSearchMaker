@@ -155,6 +155,7 @@ public class WordSearchPanel extends JPanel {
 			    String words = wordArea.getText();
 			    String letters = lettersArea.getText();
 			    WordSearchTableModel data = controller.makeTableModel(words, letters, widthField.getText(), heightField.getText());
+			    saveButton.setEnabled(true);
 			    
 			    List<String> wordsNotHid = data.getWordsNotHid();
 			    notHidArea.setText("");
@@ -186,12 +187,12 @@ public class WordSearchPanel extends JPanel {
         
         //sets up the button to save the made word search
         saveButton = new JButton("Save WordSearch");
+        saveButton.setEnabled(false);
         saveButton.setSize(enterButton.getSize());
         saveButton.setLocation(enterButton.getX()+enterButton.getWidth()+10,
         		enterButton.getY());
         saveButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent event) {
-        		
         		String path = getPathToSave();
         		WordSearchTableModel data = (WordSearchTableModel) wordSearchTable.getModel();
         		
