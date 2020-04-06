@@ -73,6 +73,10 @@ public class WordSearchMaker
     	else 
     	{
     		if(width<bigestWord&&height<bigestWord) {
+    			if(width == height)
+    			{
+    				width = (int)(Math.random()*height*2)-1;
+    			}
     			if(width>=height)
     			{
     				height = width;
