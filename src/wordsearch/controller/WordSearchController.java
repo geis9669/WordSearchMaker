@@ -153,8 +153,10 @@ public class WordSearchController
     	
     	List<String> words = data.getWordsHid();
     	List<String> wordsNotHid = data.getWordsNotHid();
-    	
-    	final int lineLength = 80;
+    	int length = 0;
+    	if(board.length > 0)
+    		length = board[0].length;	
+    	final int lineLength = length*2-1;
     	int currentLength = 0;
     	for(String word: words)
     	{
