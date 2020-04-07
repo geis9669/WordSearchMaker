@@ -216,11 +216,11 @@ public class WordSearchPanel extends JPanel {
     	{
     		fileChooser.setCurrentDirectory(new File(startPath));
     	}
-    	//fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    	fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     	result = fileChooser.showSaveDialog(this);
     	if(result == JFileChooser.APPROVE_OPTION)
     	{
-    		path = fileChooser.getCurrentDirectory().getAbsolutePath();
+    		path = fileChooser.getSelectedFile().getAbsolutePath();
     	}
     	return path;
     }
