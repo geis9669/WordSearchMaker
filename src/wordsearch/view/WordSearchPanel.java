@@ -5,10 +5,9 @@ import wordsearch.model.WordSearchTableModel;
 
 import javax.swing.table.TableColumn;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import java.awt.*;
 
 public class WordSearchPanel extends JPanel {
     private WordSearchController controller;
