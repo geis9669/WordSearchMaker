@@ -1,32 +1,10 @@
 package wordsearch.model;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class WordSearchMaker
 {
-    private final List<IntPair> DIRECTIONS;
-    
-    public WordSearchMaker()
-    {            
-        List<IntPair> directions = new ArrayList<>(8);
-        // fill the DIRECTIONS array with the DIRECTIONS I want to go
-        int index = 0;
-        for(int row = -1; row<2; row++)
-        {
-            for(int col = -1; col<2; col++)
-            {
-                if(!(row == 0 && col == 0))
-                {
-                    directions.add(new IntPair(row,col));
-                    index++;
-                }
-            }
-        }
-        DIRECTIONS = List.copyOf(directions);
-        // done with filling the DIRECTIONS immutable list
-    }
-    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
+    public static WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
     {
     	return makeBoard(wordsToHide, randomLetters, 0, 0);
     }
@@ -34,7 +12,7 @@ public class WordSearchMaker
      * 
      */
     // make it so I can have more of a square in my program
-    public WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int width, int height)
+    public static WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
     	int bigestWord = 0;
@@ -112,6 +90,19 @@ public class WordSearchMaker
                 allPossibleSpots.add(new IntPair(row,col));
             }
         }
+        List<IntPair> directions = new ArrayList<>(8);
+        int indexd = 0;
+        for(int row = -1; row<2; row++)
+        {
+            for(int col = -1; col<2; col++)
+            {
+                if(!(row == 0 && col == 0))
+                {
+                    directions.add(new IntPair(row,col));
+                    indexd++;
+                }
+            }
+        }
 
         List<String[]> wordArrays = makeWordArrays(wordsToHide);
         boolean wordPlaced;// tells me that the word has been put into the array or not.
@@ -129,7 +120,7 @@ public class WordSearchMaker
                 IntPair place = possibleSpots.remove(randomPlace);
 
                 List<IntPair> possibleDirections = new ArrayList<>(8);
-                possibleDirections.addAll(DIRECTIONS);
+                possibleDirections.addAll(directions);
                 // this loop goes through all the directions that the word can go.
                 while(!wordPlaced && possibleDirections.size() > 0) {
                     IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
@@ -173,7 +164,7 @@ public class WordSearchMaker
      * @param biased how often one will grow while the other doen't
      * @return a IntPair for both the first and second numbers
      */
-    private IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
+    private static IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
     {
     	while(!(first * second >= requiredArea ))// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
     	{
@@ -202,7 +193,7 @@ public class WordSearchMaker
      * @param word the word as a array to add to the board
      * @return true if the word fits there and false if it doesn't
      */
-    private boolean testRowDirection(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
+    private static boolean testRowDirection(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
     {
         int nextRow = startRow;
         int nextCol = startCol;
@@ -234,7 +225,7 @@ public class WordSearchMaker
      * @param directionCol move left with -1 right with 1 and nothing 0
      * @param word the word as a array to add to the board
      */
-    private void addWord(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
+    private static void addWord(String[][] board, int startRow, int startCol, int directionRow, int directionCol, String[] word)
     {
         int row = startRow;
         int col = startCol;
@@ -254,7 +245,7 @@ public class WordSearchMaker
      * @param words the words to separate into letters
      * @return the arrays of the words.
      */
-    private List<String[]> makeWordArrays(List<String> words)
+    private static List<String[]> makeWordArrays(List<String> words)
     {
         List<String[]> results = new ArrayList<>();
 

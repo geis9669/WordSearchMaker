@@ -7,12 +7,10 @@ import javax.swing.*;
 
 public class WordSearchController
 {
-    private WordSearchMaker board;
     private WordSearchFrame frame;
     
     public WordSearchController()
     {
-    	board = new WordSearchMaker();
         frame = new WordSearchFrame(this);
     }
     
@@ -27,7 +25,7 @@ public class WordSearchController
     	if(words.length()<=0 && width1<=0 && height1<= 0) {
     		return new WordSearchTableModel(new String[0][0], new ArrayList<>(0), new ArrayList<>(0)); }
     	
-        return  board.makeBoard(separateWords(words, "\n"),letters, width1,height1);
+        return  WordSearchMaker.makeBoard(separateWords(words, "\n"),letters, width1,height1);
     }
 
     /**
