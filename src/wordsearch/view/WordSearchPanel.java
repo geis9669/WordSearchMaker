@@ -191,7 +191,10 @@ public class WordSearchPanel extends JPanel {
         	public void actionPerformed(ActionEvent event) {
         		String path = getPathToSave();
         		WordSearchTableModel data = (WordSearchTableModel) wordSearchTable.getModel();
-        		controller.saveBoard(data, path);
+        		if(path != null)
+        		{
+        			controller.saveBoard(data, path);
+        		}
         	}
         });
         add(saveButton);
@@ -216,6 +219,11 @@ public class WordSearchPanel extends JPanel {
     	if(result == JFileChooser.APPROVE_OPTION)
     	{
     		path = fileChooser.getSelectedFile().getAbsolutePath();
+    	}
+    	else
+    	{
+    		path = null;
+
     	}
     	return path;
     }
