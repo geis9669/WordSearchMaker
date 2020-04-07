@@ -3,12 +3,10 @@ package wordsearch.view;
 import wordsearch.controller.WordSearchController;
 import wordsearch.model.WordSearchTableModel;
 
-import java.util.List;
-
-import java.awt.*;
+import java.util.*;
 import java.awt.event.*;
 import java.io.File;
-import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 import javax.swing.*;
 
 public class WordSearchPanel extends JPanel {
@@ -42,7 +40,6 @@ public class WordSearchPanel extends JPanel {
     {
         super();
         this.controller = controller;
-
         this.setLayout(null);
         
         // sets up where the word search will appear
