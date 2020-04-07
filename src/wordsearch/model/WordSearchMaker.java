@@ -77,8 +77,7 @@ public class WordSearchMaker
     			{
     				width = (int)(Math.random()*height*2)-1;
     			}
-    			if(width>=height)
-    			{
+    			if(width>=height){
     				height = width;
     				width = bigestWord;
     			}else {
@@ -134,7 +133,6 @@ public class WordSearchMaker
                 // this loop goes through all the directions that the word can go.
                 while(!wordPlaced && possibleDirections.size() > 0) {
                     IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
-                    //System.out.println(place.getFirst() + "  " + place.getSecond() + "  " + direction.getFirst() + "  " + direction.getSecond());
                     if(testRowDirection(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
                         addWord(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index));
                         wordPlaced = true;
@@ -264,7 +262,6 @@ public class WordSearchMaker
         {
             String word = words.get(index);
             String[] wordArray = new String[word.length()];
-
             for(int wordIndex = 0; wordIndex<word.length(); wordIndex++)
             {
                 wordArray[wordIndex] = word.substring(wordIndex, wordIndex+1);
@@ -274,77 +271,4 @@ public class WordSearchMaker
         return results;
     }
     
-    /**
-     * this gets a size for the words to put in the wordsearch
-     * it makes sure there is enough room for all the words
-     * @param words to put in  a word search
-     * @param height the desired height of the board
-     * @param width the desired width of the board
-     */
-    public void getSizeForBoard(List<String> words, int height, int width)
-    {
-        int smallestWord = Integer.MAX_VALUE/ 100;
-    	int bigestWord = 0;//Integer.MIN_VALUE;
-    	int requiredArea = 0;
-    	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
-    	for(String word : words)
-    	{
-//    		System.out.println(word + "  this");
-    		requiredArea += word.length();
-    		if(word.length()> bigestWord)
-    		{
-    			bigestWord = word.length();
-    		}
-    		if(word.length()< smallestWord)
-    		{
-    			smallestWord = word.length();
-    		}
-    	}
-    	//System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
-    	// gets the height and width that will work for the board
-    	int extraSpace = requiredArea/4;// how much extra space is needed for a word search   	
-    	if(height <= 0 && width <= 0)
-    	{
-    		IntPair  temp = growSizeToFit(smallestWord, bigestWord, requiredArea+extraSpace, 60);
-    		if((Math.random()*100) >= 50)
-        	{
-        		height = temp.getFirst();
-        		width = temp.getSecond();
-        	}
-        	else
-        	{
-        		height = temp.getSecond();
-        		width = temp.getFirst();
-        	}
-    	}
-    	else 
-    	{
-    		if(width<bigestWord&&height<bigestWord) {
-    			if(width>=height)
-    			{
-    				height = width;
-    				width = bigestWord;
-    			}else {
-    				width = height;
-    				height = bigestWord;
-    			}
-    		}
-    		int biased = 50;
-    		if(width < height)
-    		{
-    			biased += 10;
-    		}
-    		if(width>height)
-    		{
-    			biased -= 10;
-    		}
-    		IntPair temp = growSizeToFit(width, height, requiredArea+extraSpace, biased);
-    		width = temp.getFirst();
-    		height = temp.getSecond();
-    	}
-    	System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ 
-    	  (smallestWord*bigestWord)+"\nTarget"+requiredArea+", Extraspace"+extraSpace);	
-    }
-    
-   
 }

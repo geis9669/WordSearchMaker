@@ -14,7 +14,6 @@ import javax.swing.*;
 public class WordSearchPanel extends JPanel {
     private WordSearchController controller;
 
-    private SpringLayout layout;
     private JTable wordSearchTable;
     private JScrollPane wordSearchScrollPane;
     
@@ -38,15 +37,13 @@ public class WordSearchPanel extends JPanel {
     private JButton enterButton;
     
     private JButton saveButton;
-    private String lastPath;
 
     public WordSearchPanel(WordSearchController controller)
     {
         super();
         this.controller = controller;
-        this.layout = new SpringLayout();
-        
-        this.setLayout(null);//layout);
+
+        this.setLayout(null);
         
         // sets up where the word search will appear
         this.wordSearchTable = new JTable();
@@ -172,7 +169,6 @@ public class WordSearchPanel extends JPanel {
 			    	notHidScrollPane.setVisible(true);
 			    	notHidLabel.setVisible(true);
 			    }
-			    
 			    wordSearchTable.setModel(data);
 			    int width = 25;
 			    for(int col =0; col<wordSearchTable.getColumnCount() ;col++)
@@ -195,7 +191,6 @@ public class WordSearchPanel extends JPanel {
         	public void actionPerformed(ActionEvent event) {
         		String path = getPathToSave();
         		WordSearchTableModel data = (WordSearchTableModel) wordSearchTable.getModel();
-        		
         		controller.saveBoard(data, path);
         	}
         });
@@ -216,11 +211,11 @@ public class WordSearchPanel extends JPanel {
     	{
     		fileChooser.setCurrentDirectory(new File(startPath));
     	}
-    	//fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    	fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     	result = fileChooser.showSaveDialog(this);
     	if(result == JFileChooser.APPROVE_OPTION)
     	{
-    		path = fileChooser.getCurrentDirectory().getAbsolutePath();
+    		path = fileChooser.getSelectedFile().getAbsolutePath();
     	}
     	return path;
     }
