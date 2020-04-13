@@ -11,7 +11,6 @@ public class WordSearchMaker
     /**
      * 
      */
-    // make it so I can have more of a square in my program
     public static WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
@@ -20,7 +19,6 @@ public class WordSearchMaker
     	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
     	for(String word : wordsToHide)
     	{
-//    		System.out.println(word + "  this");
     		requiredArea += word.length();
     		if(word.length()> bigestWord)
     		{
@@ -31,7 +29,6 @@ public class WordSearchMaker
     			smallestWord = word.length();
     		}
     	}
-    	//System.out.println("small"+smallestWord+", big"+ bigestWord+", together"+ (smallestWord*bigestWord)+"\nTarget"+requiredArea);
     	// gets the height and width that will work for the board
     	int extraSpace = requiredArea/4;  	
     	if(height <= 0 && width <= 0)
@@ -63,7 +60,6 @@ public class WordSearchMaker
     				height = bigestWord;
     			}
     		}
-    		
     		int biased = 50;
     		if(width < height)
     		{
@@ -78,7 +74,7 @@ public class WordSearchMaker
     		height = temp.getSecond();
     	}
     	
-        String[][] board = new String[height][width];// make sure the size will actually fit
+        String[][] board = new String[height][width];
         List<String> wordsThatDidentFit = new ArrayList<>();
         
         // makes a list of all the possible spots.
@@ -90,6 +86,7 @@ public class WordSearchMaker
                 allPossibleSpots.add(new IntPair(row,col));
             }
         }
+        // makes a list of all possible directions I want to go.
         List<IntPair> directions = new ArrayList<>(8);
         int indexd = 0;
         for(int row = -1; row<2; row++)
@@ -166,10 +163,8 @@ public class WordSearchMaker
      */
     private static IntPair growSizeToFit(int first,int second,int requiredArea, int biased)
     {
-    	while(!(first * second >= requiredArea ))// smallestWord*bigestWord -(requiredArea + extraSpace) > -1
+    	while(!(first * second >= requiredArea ))
     	{
-    		//System.out.println("small "+smallestWord+", big "+ bigestWord+", together"+ 
-    	       //(smallestWord*bigestWord)+"\nTarget "+requiredArea+", extraspace "+extraSpace);
     		if((Math.random()*100)+1 <= biased)
     		{
     			first += 1;
@@ -233,8 +228,7 @@ public class WordSearchMaker
         for(int index = 0; index<word.length; index++)
         {
             String letter = word[index];
-            //System.out.println(row + "  " + col+"  "+ index); a print to debug.
-            board[row][col] = letter ;//word[index];
+            board[row][col] = letter;
             row += directionRow;
             col += directionCol;
         }
