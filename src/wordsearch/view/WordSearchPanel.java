@@ -98,7 +98,7 @@ public class WordSearchPanel extends JPanel {
         		JTextField field = (JTextField) key.getSource();
         		int length = field.getText().length();
         		// make more cases to give more detailed errors to the user
-        		if(key.getKeyChar() == KeyEvent.VK_BACK_SPACE ||(key.getKeyChar() >= '0' && key.getKeyChar()<= '9' && length<3))//can be 4
+        		if(key.getKeyChar() == KeyEvent.VK_BACK_SPACE ||(key.getKeyChar() >= '0' && key.getKeyChar()<= '9' && length<3))
         		{
         			field.setEditable(true);
         			errorLabel.setText("");
