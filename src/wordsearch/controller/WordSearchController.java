@@ -23,9 +23,9 @@ public class WordSearchController
     	int height1 = convertStringToInt(height);
     	
     	if(words.length()<=0 && width1<=0 && height1<= 0) {
-    		return new WordSearchTableModel(new String[0][0], new ArrayList<>(0), new ArrayList<>(0)); }
+    		return WordSearchTableModel.makeBoard(); }
     	
-        return  WordSearchMaker.makeBoard(separateWords(words, "\n"),letters, width1,height1);
+        return WordSearchTableModel.makeBoard(separateWords(words, "\n"),letters, width1,height1);
     }
 
     /**
