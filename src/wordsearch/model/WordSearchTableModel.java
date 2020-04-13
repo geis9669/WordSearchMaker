@@ -1,8 +1,6 @@
 package wordsearch.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import javax.swing.table.AbstractTableModel;
 
 public class WordSearchTableModel extends AbstractTableModel
