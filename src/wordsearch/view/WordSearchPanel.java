@@ -1,7 +1,7 @@
 package wordsearch.view;
 
 import wordsearch.controller.WordSearchController;
-import wordsearch.model.WordSearchTableModel;
+import wordsearch.model.WordSearch;
 
 import java.util.*;
 import java.awt.event.*;
@@ -148,10 +148,9 @@ public class WordSearchPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			    String words = wordArea.getText();
 			    String letters = lettersArea.getText();
-			    WordSearchTableModel data = controller.makeTableModel(words, letters, widthField.getText(), heightField.getText());
-			    saveButton.setEnabled(true);
+			    WordSearch wordSearch = controller.makeWordSearch(words, letters, widthField.getText(), heightField.getText());
 			    
-			    List<String> wordsNotHid = data.getWordsNotHid();
+			    List<String> wordsNotHid = wordSearch.wordsNotHid();
 			    notHidArea.setText("");
 			    notHidScrollPane.setVisible(false);
 			    notHidLabel.setVisible(false);
@@ -166,7 +165,37 @@ public class WordSearchPanel extends JPanel {
 			    	notHidScrollPane.setVisible(true);
 			    	notHidLabel.setVisible(true);
 			    }
-			    wordSearchTable.setModel(data);
+			    wordSearchTable.setModel(new AbstractTableModel() 
+			    {
+			    	private String[][] board;
+			    	@Override
+			        public String getColumnName(int c)
+			        {
+			            return c+1+"";
+			        }
+			        @Override
+			        public int getRowCount() {
+			            return board.length;
+			        }
+			        @Override
+			        public int getColumnCount() {
+			        	if(board.length==0)
+			        	{
+			        		return 0;
+			        	}
+			            return board[0].length;
+			        }
+			        @Override
+			        public Object getValueAt(int rowIndex, int columnIndex) {
+			            return board[rowIndex][columnIndex];
+			        }
+			        public AbstractTableModel init(String[][] board)
+			        {
+			        	this.board = board;
+			        	return this;
+			        }
+			    }.init(wordSearch.board()) );
+			    
 			    int width = 25;
 			    for(int col =0; col<wordSearchTable.getColumnCount() ;col++)
 			    {
@@ -180,17 +209,15 @@ public class WordSearchPanel extends JPanel {
         
         //sets up the button to save the made word search
         saveButton = new JButton("Save WordSearch");
-        saveButton.setEnabled(false);
         saveButton.setSize(enterButton.getSize());
         saveButton.setLocation(enterButton.getX()+enterButton.getWidth()+10,
         		enterButton.getY());
         saveButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent event) {
         		String path = getPathToSave();
-        		WordSearchTableModel data = (WordSearchTableModel) wordSearchTable.getModel();
         		if(path != null)
         		{
-        			controller.saveBoard(data, path);
+        			controller.saveBoard(path);
         		}
         	}
         });

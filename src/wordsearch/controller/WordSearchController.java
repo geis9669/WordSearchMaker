@@ -8,24 +8,25 @@ import javax.swing.*;
 public class WordSearchController
 {
     private WordSearchFrame frame;
+    private WordSearch currentWordSearch;
     
     public WordSearchController()
     {
+    	currentWordSearch = WordSearch.makeWordSearch();
         frame = new WordSearchFrame(this);
     }
     
-    public WordSearchTableModel makeTableModel(String words, String letters, String width, String height)
+    public WordSearch makeWordSearch(String words, String letters, String width, String height)
     {
     	if(letters.length()<= 0)
     		letters = "1";
-    	
     	int width1 = convertStringToInt(width);
     	int height1 = convertStringToInt(height);
     	
     	if(words.length()<=0 && width1<=0 && height1<= 0) {
-    		return WordSearchTableModel.makeWordSearch(); }
-    	
-        return WordSearchTableModel.makeWordSearch(separateWords(words, "\n"),letters, width1,height1);
+    		currentWordSearch = WordSearch.makeWordSearch(); }
+    	currentWordSearch = WordSearch.makeWordSearch(separateWords(words, "\n"),letters, width1,height1);
+        return currentWordSearch;
     }
 
     /**
@@ -65,12 +66,15 @@ public class WordSearchController
     	return wordArray; 
     }
     
-    
-    public void saveBoard(WordSearchTableModel data, String path)
+    public void saveBoard(String path)
+    {
+    	saveBoard(currentWordSearch, path);
+    }
+    public void saveBoard(WordSearch data, String path)
     {
     	String newLine = "\n";
     	String textToSave=newLine;
-    	String[][] board = data.getWordSearch();
+    	String[][] board = data.board();
     	for(int row = 0; row<board.length; row++) 
     	{
     		for(int col =0; col<board[0].length; col++)
@@ -83,8 +87,8 @@ public class WordSearchController
     	}
     	textToSave += newLine;
     	
-    	List<String> words = data.getWordsHid();
-    	List<String> wordsNotHid = data.getWordsNotHid();
+    	List<String> words = data.wordsHid();
+    	List<String> wordsNotHid = data.wordsNotHid();
     	int length = 0;
     	if(board.length > 0)
     		length = board[0].length;	

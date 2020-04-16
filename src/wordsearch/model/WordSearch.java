@@ -3,70 +3,40 @@ package wordsearch.model;
 import java.util.*;
 import javax.swing.table.AbstractTableModel;
 
-public class WordSearchTableModel extends AbstractTableModel
+public class WordSearch
 {
 	private List<String> wordsHid;
 	private List<String> wordsNotHid;
 	
-    private String[][] wordSearch;
+    private String[][] board;
 
-    private WordSearchTableModel(String[][] wordSearchBoard, List<String> wordsHid, List<String> wordsNotHid)
+    private WordSearch(String[][] wordSearchBoard, List<String> wordsHid, List<String> wordsNotHid)
     {
-        this.wordSearch = wordSearchBoard;
+        this.board = wordSearchBoard;
         this.wordsHid = wordsHid;
         this.wordsNotHid = wordsNotHid;
     }
-
-    public String getRowName(int r)
+    
+    public String[][] board()
     {
-    	return r+1+"";
+    	return board;
     }
     
-    @Override
-    public String getColumnName(int c)
-    {
-        return c+1+"";
-    }
-
-    @Override
-    public int getRowCount() {
-        return wordSearch.length;
-    }
-
-    @Override
-    public int getColumnCount() {
-    	if(wordSearch.length==0)
-    	{
-    		return 0;
-    	}
-        return wordSearch[0].length;
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return wordSearch[rowIndex][columnIndex];
-    }
-    
-    public String[][] getWordSearch()
-    {
-    	return wordSearch;
-    }
-    
-    public List<String> getWordsHid() {
+    public List<String> wordsHid() {
 		return wordsHid;
 	}
 
-	public List<String> getWordsNotHid() {
+	public List<String> wordsNotHid() {
 		return wordsNotHid;
 	}
 
 
-	public static WordSearchTableModel makeWordSearch()
+	public static WordSearch makeWordSearch()
 	{
-		return new WordSearchTableModel(new String[0][0], new ArrayList<String>(0), new ArrayList<String>(0));
+		return new WordSearch(new String[0][0], new ArrayList<String>(0), new ArrayList<String>(0));
 	}
 	
-	public static WordSearchTableModel makeWordSearch(List<String> wordsToHide, String randomLetters)
+	public static WordSearch makeWordSearch(List<String> wordsToHide, String randomLetters)
     {
     	return makeWordSearch(wordsToHide, randomLetters, 0, 0);
     }
@@ -74,7 +44,7 @@ public class WordSearchTableModel extends AbstractTableModel
      * 
      */
 //startAlgorithm
-    public static WordSearchTableModel makeWordSearch(List<String> wordsToHide, String randomLetters, int width, int height)
+    public static WordSearch makeWordSearch(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
     	int bigestWord = 0;
@@ -149,6 +119,7 @@ public class WordSearchTableModel extends AbstractTableModel
             }
         }
         // makes a list of all possible directions I want to go.
+        //startAbstraction
         List<IntPair> directions = new ArrayList<>(8);
         int indexd = 0;
         for(int row = -1; row<2; row++)
@@ -162,7 +133,7 @@ public class WordSearchTableModel extends AbstractTableModel
                 }
             }
         }
-
+        //endAbstraction
         List<String[]> wordArrays = makeWordArrays(wordsToHide);
         boolean wordPlaced;// tells me that the word has been put into the array or not.
 
@@ -212,7 +183,7 @@ public class WordSearchTableModel extends AbstractTableModel
                 }                
             }     
         }
-        return new WordSearchTableModel(board, wordsToHide, wordsThatDidentFit);
+        return new WordSearch(board, wordsToHide, wordsThatDidentFit);
     }
     //endAlgorithm
     
