@@ -1,13 +1,11 @@
 package wordsearch.model;
 
 import java.util.*;
-import javax.swing.table.AbstractTableModel;
 
 public class WordSearch
 {
 	private List<String> wordsHid;
 	private List<String> wordsNotHid;
-	
     private String[][] board;
 
     private WordSearch(String[][] wordSearchBoard, List<String> wordsHid, List<String> wordsNotHid)
@@ -40,10 +38,16 @@ public class WordSearch
     {
     	return makeWordSearch(wordsToHide, randomLetters, 0, 0);
     }
-    /**
-     * 
-     */
+    
 //startAlgorithm
+	/**
+	 * makes an instance of the WordSearch
+	 * @param wordsToHide in the board
+	 * @param randomLetters letters to put where the words didn't go
+	 * @param width not negative
+	 * @param height not negative
+	 * @return the WordSearch 
+	 */
     public static WordSearch makeWordSearch(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
