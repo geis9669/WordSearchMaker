@@ -61,20 +61,20 @@ public class WordSearchTableModel extends AbstractTableModel
 	}
 
 
-	public static WordSearchTableModel makeBoard()
+	public static WordSearchTableModel makeWordSearch()
 	{
 		return new WordSearchTableModel(new String[0][0], new ArrayList<String>(0), new ArrayList<String>(0));
 	}
 	
-	public static WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters)
+	public static WordSearchTableModel makeWordSearch(List<String> wordsToHide, String randomLetters)
     {
-    	return makeBoard(wordsToHide, randomLetters, 0, 0);
+    	return makeWordSearch(wordsToHide, randomLetters, 0, 0);
     }
     /**
      * 
      */
 //startAlgorithm
-    public static WordSearchTableModel makeBoard(List<String> wordsToHide, String randomLetters, int width, int height)
+    public static WordSearchTableModel makeWordSearch(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	int smallestWord = Integer.MAX_VALUE/100;
     	int bigestWord = 0;
@@ -139,7 +139,6 @@ public class WordSearchTableModel extends AbstractTableModel
     	
         String[][] board = new String[height][width];
         List<String> wordsThatDidentFit = new ArrayList<>();
-        
         // makes a list of all the possible spots.
         List<IntPair> allPossibleSpots = new ArrayList<>();
         for(int row = 0; row<board.length; row++)
