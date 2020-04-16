@@ -20,18 +20,20 @@ public class WordSearchController
     {
     	if(letters.length()<= 0)
     		letters = "1";
+    	
     	int width1 = convertStringToInt(width);
     	int height1 = convertStringToInt(height);
     	
-    	if(words.length()<=0 && width1<=0 && height1<= 0) {
-    		currentWordSearch = WordSearch.makeWordSearch(); }
+    	if(words.length()<=0 && width1<=0 && height1<= 0) 
+    		currentWordSearch = WordSearch.makeWordSearch(); 
+    	
     	currentWordSearch = WordSearch.makeWordSearch(separateWords(words, "\n"),letters, width1,height1);
         return currentWordSearch;
     }
 
     /**
      * 
-     * @param number to make a int
+     * @param String to make an int
      * @return either the number from the string or zero
      */
 	private int convertStringToInt(String number) {
@@ -124,26 +126,4 @@ public class WordSearchController
     	JOptionPane.showMessageDialog(frame, error.getMessage());
     }
     
-    /*
-     * this method is to test separate words 
-     */
-    public void testSeparateWords()
-    {
-    	System.out.println("Test 1");
-    	String words = "greg,week,day,month,year";
-    	List<String> wordArray = separateWords(words, ",");
-    	for(String charset: wordArray)
-    	{
-    		System.out.println("word  " +charset + "  " + words.length());
-    	}
-    	
-    	System.out.println("Test 2");
-    	words = "";
-    	wordArray = separateWords(words, ",");
-    	for(String charset:wordArray)
-    	{
-    		System.out.println("word  " +charset + "  " + words.length());
-    	}
-    }
-
 }
