@@ -50,68 +50,9 @@ public class WordSearch
 	 */
     public static WordSearch makeWordSearch(List<String> wordsToHide, String randomLetters, int width, int height)
     {
-    	int smallestWord = Integer.MAX_VALUE/100;
-    	int bigestWord = 0;
-    	int requiredArea = 0;
-    	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
-    	for(String word : wordsToHide)
-    	{
-    		requiredArea += word.length();
-    		if(word.length()> bigestWord)
-    		{
-    			bigestWord = word.length();
-    		}
-    		if(word.length()< smallestWord)
-    		{
-    			smallestWord = word.length();
-    		}
-    	}
-    	// gets the height and width that will work for the board
-    	int extraSpace = requiredArea/4;  	
-    	if(height <= 0 && width <= 0)
-    	{
-    		IntPair  temp = growSizeToFit(smallestWord, bigestWord, requiredArea+extraSpace, 60);
-    		if((Math.random()*100) >= 50)
-        	{
-        		height = temp.getFirst();
-        		width = temp.getSecond();
-        	}
-        	else
-        	{
-        		height = temp.getSecond();
-        		width = temp.getFirst();
-        	}
-    	}
-    	else 
-    	{
-    		if(width<bigestWord&&height<bigestWord) {
-    			if(width == height)
-    			{
-    				width = (int)(Math.random()*height*2)-1;
-    			}
-    			if(width>=height){
-    				height = width;
-    				width = bigestWord;
-    			}else {
-    				width = height;
-    				height = bigestWord;
-    			}
-    		}
-    		int biased = 50;
-    		if(width < height)
-    		{
-    			biased += 10;
-    		}
-    		if(width>height)
-    		{
-    			biased -= 10;
-    		}
-    		IntPair temp = growSizeToFit(width, height, requiredArea+extraSpace, biased);
-    		width = temp.getFirst();
-    		height = temp.getSecond();
-    	}
+    	IntPair size = createSize(wordsToHide, width, height);
     	
-        String[][] board = new String[height][width];
+        String[][] board = new String[size.getFirst()][size.getSecond()];
         List<String> wordsThatDidentFit = new ArrayList<>();
         // makes a list of all the possible spots.
         List<IntPair> allPossibleSpots = new ArrayList<>();
@@ -190,6 +131,68 @@ public class WordSearch
         return new WordSearch(board, wordsToHide, wordsThatDidentFit);
     }
     //endAlgorithm
+
+	private static IntPair createSize(List<String> wordsToHide, int width, int height) {
+		int smallestWord = Integer.MAX_VALUE/100;
+    	int bigestWord = 0;
+    	int requiredArea = 0;
+    	// this gets the total minimum space needed for all the words, and it finds the biggest and smallest word lengths
+    	for(String word : wordsToHide)
+    	{
+    		requiredArea += word.length();
+    		if(word.length()> bigestWord)
+    		{
+    			bigestWord = word.length();
+    		}
+    		if(word.length()< smallestWord)
+    		{
+    			smallestWord = word.length();
+    		}
+    	}
+    	// gets the height and width that will work for the board
+    	int extraSpace = requiredArea/4; 
+    	int biased = 50;
+    	if(height <= 0 && width <= 0)
+    	{
+    		if((Math.random()*2) == 1)
+        	{
+        		width = bigestWord;
+        		height = smallestWord;
+        	}
+    		else
+    		{
+    			width = smallestWord;
+    			height = bigestWord;
+    		}
+    	}
+    	else 
+    	{
+    		if(width<bigestWord&&height<bigestWord) {
+    			if(width == height)
+    			{
+    				width = (int)(Math.random()*height*2)-1;
+    			}
+    			if(width>=height){
+    				height = width;
+    				width = bigestWord;
+    			}else {
+    				width = height;
+    				height = bigestWord;
+    			}
+    		}
+    		if(width<height)
+    		{
+    			biased += 10;
+    		}
+    		if(width>height)
+    		{
+    			biased -= 10;
+    		}
+    		
+    	}
+    	IntPair size = growSizeToFit(width, height, requiredArea+extraSpace, biased);
+    	return size;
+	}
     
     /**
      * grows the first and second by one until their area is greater then the required area
