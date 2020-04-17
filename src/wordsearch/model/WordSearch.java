@@ -150,7 +150,6 @@ public class WordSearch
     		}
     	}
     	// gets the height and width that will work for the board
-    	int extraSpace = requiredArea/4; 
     	int biased = 50;
     	if(height <= 0 && width <= 0)
     	{
@@ -190,6 +189,7 @@ public class WordSearch
     		}
     		
     	}
+    	int extraSpace = requiredArea/4; 
     	IntPair size = growSizeToFit(width, height, requiredArea+extraSpace, biased);
     	return size;
 	}
