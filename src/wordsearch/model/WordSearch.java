@@ -39,7 +39,7 @@ public class WordSearch
     	return makeWordSearch(wordsToHide, randomLetters, 0, 0);
     }
     
-//startAlgorithm
+
 	/**
 	 * makes an instance of the WordSearch
 	 * @param wordsToHide in the board
@@ -48,6 +48,7 @@ public class WordSearch
 	 * @param height not negative
 	 * @return the WordSearch 
 	 */
+//startAlgorithm
     public static WordSearch makeWordSearch(List<String> wordsToHide, String randomLetters, int width, int height)
     {
     	IntPair size = createSize(wordsToHide, width, height);
@@ -82,21 +83,18 @@ public class WordSearch
         List<String[]> wordArrays = makeWordArrays(wordsToHide);
         boolean wordPlaced;// tells me that the word has been put into the array or not.
 
-        // this loop goes through each word to find it a home.
         for(int index = 0; index<wordArrays.size(); index++)
         {
             wordPlaced = false;
 
             List<IntPair> possibleSpots = new ArrayList<>();
             possibleSpots.addAll(allPossibleSpots);
-            // this loop goes through all the spots until it finds one that works
             while(!wordPlaced && possibleSpots.size()>0) {
                 int randomPlace = (int) (Math.random()*possibleSpots.size());
                 IntPair place = possibleSpots.remove(randomPlace);
 
                 List<IntPair> possibleDirections = new ArrayList<>(8);
                 possibleDirections.addAll(directions);
-                // this loop goes through all the directions that the word can go.
                 while(!wordPlaced && possibleDirections.size() > 0) {
                     IntPair direction = possibleDirections.remove(((int) (Math.random() * possibleDirections.size())));
                     if(testRowDirection(board, place.getFirst(), place.getSecond(), direction.getFirst(), direction.getSecond(), wordArrays.get(index))) {
@@ -115,7 +113,6 @@ public class WordSearch
                 wordsThatDidentFit.add(word);
             }
         }
-        // sets the nulls to random characters 
         for(int row= 0; row< board.length; row++)
         { 
             for(int col = 0; col< board[0].length; col++)
@@ -130,7 +127,7 @@ public class WordSearch
         }
         return new WordSearch(board, wordsToHide, wordsThatDidentFit);
     }
-    //endAlgorithm
+//endAlgorithm
 
 	private static IntPair createSize(List<String> wordsToHide, int width, int height) {
 		int smallestWord = Integer.MAX_VALUE/100;
