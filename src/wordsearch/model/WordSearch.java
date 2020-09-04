@@ -55,7 +55,7 @@ public class WordSearch
     	
         String[][] board = new String[size.getFirst()][size.getSecond()];
         List<String> wordsThatDidentFit = new ArrayList<>();
-        // makes a list of all the possible spots.
+       
         List<IntPair> allPossibleSpots = new ArrayList<>();
         for(int row = 0; row<board.length; row++)
         {
@@ -64,7 +64,6 @@ public class WordSearch
                 allPossibleSpots.add(new IntPair(row,col));
             }
         }
-        // makes a list of all possible directions I want to go.
         //startAbstraction
         List<IntPair> directions = new ArrayList<>(8);
         int indexd = 0;
@@ -81,7 +80,7 @@ public class WordSearch
         }
         //endAbstraction
         List<String[]> wordArrays = makeWordArrays(wordsToHide);
-        boolean wordPlaced;// tells me that the word has been put into the array or not.
+        boolean wordPlaced;
 
         for(int index = 0; index<wordArrays.size(); index++)
         {
@@ -107,9 +106,7 @@ public class WordSearch
             {
                 String word = "";
                 for(String letter: wordArrays.get(index))
-                {
                     word += letter;
-                }
                 wordsThatDidentFit.add(word);
             }
         }
